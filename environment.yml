@@ -1,7 +1,5 @@
 name: data_science
 channels:
-  - plotly
-  - anaconda
   - conda-forge
   - defaults
 dependencies:
