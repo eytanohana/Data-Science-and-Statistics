@@ -1,6 +1,7 @@
 from app.utils.clt import update_distribution, CltConsts
 
 import streamlit as st
+import plotly.express as px
 
 st.set_page_config(page_title='CLT', page_icon='📉', layout='wide')
 
@@ -21,4 +22,11 @@ dist_value_cols = st.columns(n_dist_values)
 for i, dist_col in enumerate(dist_value_cols, 1):
     dist_col.button(f'{i}', on_click=update_distribution, args=(i,))
 
-st.success(st.session_state[CltConsts.DIST])
+st.plotly_chart(
+    px.bar(
+        x=st.session_state[CltConsts.DIST][CltConsts.VALUES],
+        y=st.session_state[CltConsts.DIST][CltConsts.PROB],
+        range_x=(0, n_dist_values + 1),
+        labels={'x': 'k', 'y': 'P(x=k)'}
+    )
+)
