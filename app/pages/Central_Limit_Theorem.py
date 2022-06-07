@@ -10,6 +10,11 @@ st.markdown('''The central theorem limit states that for *almost* any distributi
                means will look more and more normal.''')
 
 st.subheader('Create a random distribution')
-dist_value_cols = st.columns(20)
+n_dist_values = 20
+if 'distribution' not in st.session_state:
+    st.session_state.distribution_values = []
+    st.session_state.distribution = {}
+
+dist_value_cols = st.columns(n_dist_values)
 for i, dist_col in enumerate(dist_value_cols, 1):
-    dist_col.button(f'{i}')
+    dist_col.button(f'{i}', on_click=update_distribution, args=(i,))
