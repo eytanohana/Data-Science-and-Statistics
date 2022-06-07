@@ -9,3 +9,7 @@ st.markdown('''The central theorem limit states that for *almost* any distributi
                of size n that as we increase the sample size n, the distribution of the sample 
                means will look more and more normal.''')
 
+st.subheader('Create a random distribution')
+dist_value_cols = st.columns(20)
+for i, dist_col in enumerate(dist_value_cols, 1):
+    dist_col.button(f'{i}')
