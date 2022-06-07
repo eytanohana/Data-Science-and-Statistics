@@ -4,7 +4,7 @@ import streamlit as st
 
 class CltConsts:
     VALUES = 'values'
-    DIST = 'dist'
+    DIST_VALS = 'dist_vals'
     PROB = 'prob'
 
 
