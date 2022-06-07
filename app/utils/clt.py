@@ -6,6 +6,7 @@ class CltConsts:
     VALUES = 'values'
     DIST_VALS = 'dist_vals'
     PROB = 'prob'
+    SAMPLE_MEANS = 'sample_means'
 
 
 def update_distribution(i):
@@ -25,3 +26,4 @@ def generate_sample_means(sample_size, n_samples):
                                                p=st.session_state[CltConsts.PROB],
                                                size=sample_size).mean()
                               for _ in range(n_samples)])
+    st.session_state[CltConsts.SAMPLE_MEANS] = sample_means
