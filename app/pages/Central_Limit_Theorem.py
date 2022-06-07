@@ -1,6 +1,6 @@
 import numpy as np
 
-from app.utils.clt import update_distribution, CltConsts
+from app.utils.clt import CltConsts, update_distribution, generate_sample_means
 
 import streamlit as st
 import plotly.express as px
@@ -36,6 +36,13 @@ st.plotly_chart(
         y=st.session_state[CltConsts.PROB],
         range_x=(0, n_dist_values + 1),
         labels={'x': 'k', 'y': 'P(x=k)'},
-        title=f'Distribution with mean {mean:.3f} and standard deviation {std:.3f}'
+        title=f'μ = {mean:.3f} σ = {std:.3f}'
     )
 )
+
+st.markdown('---')
+
+sample_size = st.number_input('Sample size', 1, 100, value=5)
+sample_means = st.number_input('Number of samples', 100, 10_000, value=500)
+
+st.button('Generate sample means', on_click=generate_sample_means, args=(sample_size, sample_means))
