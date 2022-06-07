@@ -13,7 +13,7 @@ st.markdown('''The central theorem limit states that for *almost* any distributi
 
 st.subheader('Create a random distribution')
 if CltConsts.DIST not in st.session_state:
-    st.session_state[CltConsts.DIST_VALUES] = []
+    st.session_state[CltConsts.VALUES] = []
     st.session_state[CltConsts.DIST] = {}
 
 n_dist_values = 20

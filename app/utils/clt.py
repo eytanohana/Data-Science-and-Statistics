@@ -3,13 +3,14 @@ import streamlit as st
 
 
 class CltConsts:
-    DIST_VALUES = 'dist_values'
+    VALUES = 'values'
     DIST = 'dist'
+    COUNTS = 'counts'
 
 
 def update_distribution(i):
-    st.session_state[CltConsts.DIST_VALUES].append(i)
-    values, counts = np.unique(st.session_state[CltConsts.DIST_VALUES], return_counts=True)
+    st.session_state[CltConsts.VALUES].append(i)
+    values, counts = np.unique(st.session_state[CltConsts.VALUES], return_counts=True)
     probs = counts / counts.sum()
     st.session_state[CltConsts.DIST] = dict(zip(values, probs))
 
