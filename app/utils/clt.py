@@ -26,3 +26,14 @@ def generate_sample_means(sample_size, n_samples):
                                                   size=sample_size).mean()
                                  for _ in range(n_samples)])
     st.session_state[CltConsts.SAMPLE_MEANS] = sample_means
+
+
+def get_distribution_mean():
+    return np.sum(st.session_state[CltConsts.DIST_VALS] * st.session_state[CltConsts.PROBS])
+
+
+def get_distribution_std():
+    return np.sqrt(
+        np.sum(st.session_state[CltConsts.DIST_VALS] ** 2 * st.session_state[CltConsts.PROBS])
+        - get_distribution_mean() ** 2
+    )
