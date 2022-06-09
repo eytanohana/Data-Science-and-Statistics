@@ -12,7 +12,6 @@ class CltConsts:
 def update_distribution(i):
     st.session_state[CltConsts.VALUES].append(i)
     values, counts = np.unique(st.session_state[CltConsts.VALUES], return_counts=True)
-    probs = counts / counts.sum()
     st.session_state[CltConsts.DIST_VALS] = values
     st.session_state[CltConsts.PROBS] = counts / counts.sum()
 
