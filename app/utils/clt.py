@@ -17,7 +17,7 @@ def update_distribution(i):
 
 
 def generate_sample_means(sample_size, n_samples):
-    if len(st.session_state[CltConsts.DIST_VALS]) == 0:
+    if len(st.session_state[CltConsts.VALUES]) == 0:
         st.error('You must create a distribution before generating sample means.')
         return
     with st.spinner('Generating sample means'):
