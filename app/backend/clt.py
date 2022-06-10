@@ -16,6 +16,7 @@ def init():
     st.session_state[VALUES] = []
     st.session_state[DIST_VALS] = np.array([])
     st.session_state[PROBS] = np.array([])
+    st.session_state[SAMPLE_MEANS] = np.array([])
 
 
 def update_distribution(i):
