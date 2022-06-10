@@ -6,6 +6,7 @@ VALUES = 'values'
 DIST_VALS = 'dist_vals'
 PROBS = 'probs'
 SAMPLE_MEANS = 'sample_means'
+SAMPLE_SIZE = 'sample_size'
 
 
 def is_init():
@@ -17,6 +18,7 @@ def init():
     st.session_state[DIST_VALS] = np.array([])
     st.session_state[PROBS] = np.array([])
     st.session_state[SAMPLE_MEANS] = np.array([])
+    st.session_state[SAMPLE_SIZE] = 0
 
 
 def update_distribution(i):
@@ -34,6 +36,7 @@ def generate_sample_means(sample_size, n_samples):
                                               p=st.session_state[PROBS],
                                               size=sample_size).mean()
                              for _ in range(n_samples)])
+    st.session_state[SAMPLE_SIZE] = sample_size
     st.session_state[SAMPLE_MEANS] = sample_means
 
 
