@@ -48,7 +48,6 @@ if st.button('Generate sample means'):
         clt.generate_sample_means(sample_size, n_samples)
     sample_means = st.session_state[clt.SAMPLE_MEANS]
     fig = ff.create_distplot([sample_means], group_labels=['Sample Means'], bin_size=0.1, show_rug=False)
-    # fig.update_layout(title_text=f'# Distribution of {n_samples} sample means using sample size {sample_size}.')
     st.markdown(f'#### Distribution of {n_samples} sample means using sample size {sample_size}.')
     st.plotly_chart(fig)
 
