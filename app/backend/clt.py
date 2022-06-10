@@ -28,6 +28,10 @@ def update_distribution(i):
     st.session_state[PROBS] = counts / counts.sum()
 
 
+def clear_distribution():
+    init()
+
+
 def generate_sample_means(sample_size, n_samples):
     if len(st.session_state[VALUES]) == 0:
         st.error('You must create a distribution before generating sample means.')
@@ -57,5 +61,3 @@ def get_theoretical_sample_means_mean():
 
 def get_theoretical_sample_means_std():
     return get_distribution_std() / np.sqrt(st.session_state[SAMPLE_SIZE])
-
-
