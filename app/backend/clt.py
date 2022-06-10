@@ -81,7 +81,12 @@ def plotly_distribution_chart(n_dist_values, mean, std):
 
 
 def plotly_sample_means_chart():
-    fig = ff.create_distplot([st.session_state[SAMPLE_MEANS]], group_labels=['Sample Means'], bin_size=0.1, show_rug=False)
+    fig = ff.create_distplot(
+        [st.session_state[SAMPLE_MEANS]],
+        group_labels=['Sample Means'],
+        bin_size=0.1,
+        show_rug=False
+    )
     title = f'#### Distribution of {len(st.session_state[SAMPLE_MEANS])} sample ' \
             f'means using sample size {st.session_state[SAMPLE_SIZE]}.'
     return fig, title
