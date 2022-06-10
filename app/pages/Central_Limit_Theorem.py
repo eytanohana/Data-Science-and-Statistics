@@ -1,5 +1,3 @@
-import numpy as np
-
 from app.utils import clt
 
 import streamlit as st
@@ -16,10 +14,8 @@ st.markdown('''The central theorem limit states that for *almost* any distributi
 
 n_dist_values = 20
 st.subheader(f'Create a random distribution with {n_dist_values} distinct possible values')
-if clt.DIST_VALS not in st.session_state:
-    st.session_state[clt.VALUES] = []
-    st.session_state[clt.DIST_VALS] = np.array([])
-    st.session_state[clt.PROBS] = np.array([])
+if not clt.is_init():
+    clt.init()
 
 dist_value_cols = st.columns(n_dist_values)
 for i, dist_col in enumerate(dist_value_cols, 1):

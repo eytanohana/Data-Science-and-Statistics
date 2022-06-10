@@ -8,6 +8,16 @@ PROBS = 'probs'
 SAMPLE_MEANS = 'sample_means'
 
 
+def is_init():
+    return DIST_VALS in st.session_state
+
+
+def init():
+    st.session_state[VALUES] = []
+    st.session_state[DIST_VALS] = np.array([])
+    st.session_state[PROBS] = np.array([])
+
+
 def update_distribution(i):
     st.session_state[VALUES].append(i)
     values, counts = np.unique(st.session_state[VALUES], return_counts=True)
