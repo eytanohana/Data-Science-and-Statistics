@@ -36,7 +36,8 @@ def clear_distribution():
 
 
 def has_distribution():
-    return len(st.session_state[VALUES]) > 1
+    return len(np.unique(st.session_state[DIST_VALS])) > 1
+
 
 def generate_sample_means(sample_size, n_samples):
     if len(st.session_state[VALUES]) == 0:
