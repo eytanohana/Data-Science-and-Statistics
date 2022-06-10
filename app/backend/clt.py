@@ -8,6 +8,7 @@ DIST_VALS = 'dist_vals'
 PROBS = 'probs'
 SAMPLE_MEANS = 'sample_means'
 SAMPLE_SIZE = 'sample_size'
+GENERATED_SAMPLE_MEANS = 'generate_sample_means'
 
 
 def is_init():
@@ -20,6 +21,7 @@ def init():
     st.session_state[PROBS] = np.array([])
     st.session_state[SAMPLE_MEANS] = np.array([])
     st.session_state[SAMPLE_SIZE] = 0
+    st.session_state[GENERATED_SAMPLE_MEANS] = False
 
 
 def update_distribution(i):
@@ -73,3 +75,12 @@ def plotly_distribution_chart(n_dist_values, mean, std):
         labels={'x': 'k', 'y': 'P(x=k)'},
         title=f'μ = {mean:.3f} σ = {std:.3f}'
     )
+
+
+def set_sample_means_generated():
+    st.session_state[GENERATED_SAMPLE_MEANS] = True
+
+
+@property
+def sample_means_generated():
+    return st.session_state[GENERATED_SAMPLE_MEANS]
