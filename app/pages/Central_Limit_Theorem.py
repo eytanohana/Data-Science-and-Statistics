@@ -2,6 +2,7 @@ from app.backend import clt
 
 import streamlit as st
 import plotly.express as px
+import plotly.figure_factory as ff
 
 st.set_page_config(page_title='CLT', page_icon='📉', layout='wide')
 
@@ -37,6 +38,11 @@ st.plotly_chart(
 st.markdown('---')
 
 sample_size = st.number_input('Sample size', 1, 100, value=5)
-sample_means = st.number_input('Number of samples', 100, 10_000, value=500)
+sample_means = st.number_input('Number of samples', value=500)
 
-st.button('Generate sample means', on_click=clt.generate_sample_means, args=(sample_size, sample_means))
+if st.button('Generate sample means'):
+    with st.spinner(f'Generating {sample_means} sample means'):
+        clt.generate_sample_means(sample_size, sample_means)
+    fig = ff.create_distplot([st.session_state[clt.SAMPLE_MEANS]], group_labels=['Sample Means'], show_rug=False)
+    fig.update_layout(title_text='Distribution of the sample means')
+    st.plotly_chart(fig)
