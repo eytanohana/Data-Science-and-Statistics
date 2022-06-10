@@ -3,8 +3,6 @@ import pandas as pd
 from app.backend import clt
 
 import streamlit as st
-import plotly.express as px
-import plotly.figure_factory as ff
 
 st.set_page_config(page_title='CLT', page_icon='📉', layout='wide')
 
@@ -28,13 +26,7 @@ mean = clt.get_distribution_mean()
 std = clt.get_distribution_std()
 
 st.plotly_chart(
-    px.bar(
-        x=st.session_state[clt.DIST_VALS],
-        y=st.session_state[clt.PROBS],
-        range_x=(0, n_dist_values + 1),
-        labels={'x': 'k', 'y': 'P(x=k)'},
-        title=f'μ = {mean:.3f} σ = {std:.3f}'
-    )
+    clt.plotly_distribution_chart(n_dist_values, mean, std)
 )
 st.button('Clear', on_click=clt.clear_distribution)
 
