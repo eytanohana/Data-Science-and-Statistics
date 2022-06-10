@@ -1,4 +1,5 @@
 import numpy as np
+import plotly.express as px
 import streamlit as st
 
 
@@ -61,3 +62,14 @@ def get_theoretical_sample_means_mean():
 
 def get_theoretical_sample_means_std():
     return get_distribution_std() / np.sqrt(st.session_state[SAMPLE_SIZE])
+
+
+@st.cache(show_spinner=False)
+def plotly_distribution_chart(n_dist_values, mean, std):
+    return px.bar(
+        x=st.session_state[DIST_VALS],
+        y=st.session_state[PROBS],
+        range_x=(0, n_dist_values + 1),
+        labels={'x': 'k', 'y': 'P(x=k)'},
+        title=f'μ = {mean:.3f} σ = {std:.3f}'
+    )
