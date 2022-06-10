@@ -32,8 +32,8 @@ st.button('Clear', on_click=clt.clear_distribution)
 
 st.markdown('---')
 a, b = st.columns(2)
-sample_size = a.number_input('Sample size', value=10, step=5)
-n_samples = b.number_input('Number of samples', value=500, step=100)
+sample_size = int(a.number_input('Sample size', value=10, step=5))
+n_samples = int(b.number_input('Number of samples', value=500, step=100))
 
 if clt.has_distribution():
     with st.spinner(f'Generating {n_samples} sample means'):
