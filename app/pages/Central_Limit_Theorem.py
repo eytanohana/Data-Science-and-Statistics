@@ -1,3 +1,5 @@
+import pandas as pd
+
 from app.backend import clt
 
 import streamlit as st
@@ -38,17 +40,21 @@ st.plotly_chart(
 
 st.markdown('---')
 
-sample_size = st.number_input('Sample size', 1, 100, value=5)
-sample_means = st.number_input('Number of samples', value=500)
+sample_size = st.number_input('Sample size', value=10)
+n_samples = st.number_input('Number of samples', value=500)
 
 if st.button('Generate sample means'):
-    with st.spinner(f'Generating {sample_means} sample means'):
-        clt.generate_sample_means(sample_size, sample_means)
+    with st.spinner(f'Generating {n_samples} sample means'):
+        clt.generate_sample_means(sample_size, n_samples)
     sample_means = st.session_state[clt.SAMPLE_MEANS]
-    fig = ff.create_distplot([sample_means], group_labels=['Sample Means'], bin_size=0.5, show_rug=False)
-    fig.add_annotation(x=sample_means.min(), text=f"μ = {sample_means.mean():.3f}\nσ = {sample_means.std():.3f}", showarrow=False,
-                       font=dict(family="Courier New, monospace", size=16, color="#ffffff"),
-                       align="center", ax=20, ay=-30, bordercolor="#c7c7c7", borderwidth=2, borderpad=4,
-                       bgcolor="#ff7f0e", opacity=0.7)
-    fig.update_layout(title_text='Distribution of the sample means')
+    fig = ff.create_distplot([sample_means], group_labels=['Sample Means'], bin_size=0.1, show_rug=False)
+    # fig.update_layout(title_text=f'# Distribution of {n_samples} sample means using sample size {sample_size}.')
+    st.markdown(f'#### Distribution of {n_samples} sample means using sample size {sample_size}.')
     st.plotly_chart(fig)
+
+    theoretical_mean, theoretical_std = clt.get_theoretical_sample_means_mean(), clt.get_theoretical_sample_means_std()
+    actual_mean, actual_std = sample_means.mean(), sample_means.std()
+    st.dataframe(pd.DataFrame({'Theoretical': [theoretical_mean, theoretical_std],
+                               'Actual': [actual_mean, actual_std],
+                               'Gap': [abs(theoretical_mean - actual_mean), abs(theoretical_std - actual_std)]},
+                              index=['Mean', 'Standard Deviation']))
