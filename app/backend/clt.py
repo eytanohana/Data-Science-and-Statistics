@@ -49,3 +49,13 @@ def get_distribution_std():
         np.sum(st.session_state[DIST_VALS] ** 2 * st.session_state[PROBS])
         - get_distribution_mean() ** 2
     )
+
+
+def get_theoretical_sample_means_mean():
+    return get_distribution_mean()
+
+
+def get_theoretical_sample_means_std():
+    return get_distribution_std() / np.sqrt(st.session_state[SAMPLE_SIZE])
+
+
