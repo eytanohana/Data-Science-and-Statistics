@@ -3,7 +3,6 @@ import plotly.express as px
 import plotly.figure_factory as ff
 import streamlit as st
 
-
 VALUES = 'values'
 DIST_VALS = 'dist_vals'
 PROBS = 'probs'
@@ -43,12 +42,11 @@ def generate_sample_means(sample_size, n_samples):
     if len(st.session_state[VALUES]) == 0:
         st.error('You must create a distribution before generating sample means.')
         return
-    sample_means = np.array([np.random.choice(st.session_state[DIST_VALS],
-                                              p=st.session_state[PROBS],
-                                              size=sample_size).mean()
-                             for _ in range(n_samples)])
+    st.session_state[SAMPLE_MEANS] = np.array([np.random.choice(st.session_state[DIST_VALS],
+                                                                p=st.session_state[PROBS],
+                                                                size=sample_size).mean()
+                                               for _ in range(n_samples)])
     st.session_state[SAMPLE_SIZE] = sample_size
-    st.session_state[SAMPLE_MEANS] = sample_means
 
 
 def get_distribution_mean():
