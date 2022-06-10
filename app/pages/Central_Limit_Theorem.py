@@ -43,6 +43,11 @@ sample_means = st.number_input('Number of samples', value=500)
 if st.button('Generate sample means'):
     with st.spinner(f'Generating {sample_means} sample means'):
         clt.generate_sample_means(sample_size, sample_means)
-    fig = ff.create_distplot([st.session_state[clt.SAMPLE_MEANS]], group_labels=['Sample Means'], show_rug=False)
+    sample_means = st.session_state[clt.SAMPLE_MEANS]
+    fig = ff.create_distplot([sample_means], group_labels=['Sample Means'], bin_size=0.5, show_rug=False)
+    fig.add_annotation(x=sample_means.min(), text=f"μ = {sample_means.mean():.3f}\nσ = {sample_means.std():.3f}", showarrow=False,
+                       font=dict(family="Courier New, monospace", size=16, color="#ffffff"),
+                       align="center", ax=20, ay=-30, bordercolor="#c7c7c7", borderwidth=2, borderpad=4,
+                       bgcolor="#ff7f0e", opacity=0.7)
     fig.update_layout(title_text='Distribution of the sample means')
     st.plotly_chart(fig)
