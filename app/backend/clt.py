@@ -1,5 +1,6 @@
 import numpy as np
 import plotly.express as px
+import plotly.figure_factory as ff
 import streamlit as st
 
 
@@ -34,6 +35,9 @@ def update_distribution(i):
 def clear_distribution():
     init()
 
+
+def has_distribution():
+    return len(st.session_state[VALUES]) > 1
 
 def generate_sample_means(sample_size, n_samples):
     if len(st.session_state[VALUES]) == 0:
@@ -77,10 +81,12 @@ def plotly_distribution_chart(n_dist_values, mean, std):
     )
 
 
-def set_sample_means_generated():
-    st.session_state[GENERATED_SAMPLE_MEANS] = True
+def plotly_sample_means_chart():
+    fig = ff.create_distplot([st.session_state[SAMPLE_MEANS]], group_labels=['Sample Means'], bin_size=0.1, show_rug=False)
+    title = f'#### Distribution of {len(st.session_state[SAMPLE_MEANS])} sample ' \
+            f'means using sample size {st.session_state[SAMPLE_SIZE]}.'
+    return fig, title
 
 
-@property
-def sample_means_generated():
-    return st.session_state[GENERATED_SAMPLE_MEANS]
+def sample_means():
+    return st.session_state[SAMPLE_MEANS]
