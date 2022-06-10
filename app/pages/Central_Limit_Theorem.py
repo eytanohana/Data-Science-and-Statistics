@@ -21,6 +21,7 @@ if not clt.is_init():
 dist_value_cols = st.columns(n_dist_values)
 for i, dist_col in enumerate(dist_value_cols, 1):
     dist_col.button(f'{i}', on_click=clt.update_distribution, args=(i,))
+st.button('Clear', on_click=clt.clear_distribution)
 
 mean = clt.get_distribution_mean()
 std = clt.get_distribution_std()
