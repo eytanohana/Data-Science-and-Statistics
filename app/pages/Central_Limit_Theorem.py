@@ -1,4 +1,4 @@
-from app.utils import clt
+from app.backend import clt
 
 import streamlit as st
 import plotly.express as px
