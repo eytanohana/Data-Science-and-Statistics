@@ -39,9 +39,9 @@ st.plotly_chart(
 )
 
 st.markdown('---')
-
-sample_size = st.number_input('Sample size', value=10)
-n_samples = st.number_input('Number of samples', value=500)
+a, b = st.columns(2)
+sample_size = a.number_input('Sample size', value=10)
+n_samples = b.number_input('Number of samples', value=500)
 
 if st.button('Generate sample means'):
     with st.spinner(f'Generating {n_samples} sample means'):
