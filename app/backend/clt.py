@@ -29,7 +29,7 @@ def generate_sample_means(sample_size, n_samples):
     if len(st.session_state[VALUES]) == 0:
         st.error('You must create a distribution before generating sample means.')
         return
-    with st.spinner('Generating sample means'):
+    with st.spinner(f'Generating {n_samples} sample means'):
         sample_means = np.array([np.random.choice(st.session_state[DIST_VALS],
                                                   p=st.session_state[PROBS],
                                                   size=sample_size).mean()
