@@ -35,16 +35,15 @@ a, b = st.columns(2)
 sample_size = a.number_input('Sample size', value=10)
 n_samples = b.number_input('Number of samples', value=500)
 
-if st.button('Generate sample means', on_click=clt.set_sample_means_generated) or clt.sample_means_generated:
+if clt.has_distribution():
     with st.spinner(f'Generating {n_samples} sample means'):
         clt.generate_sample_means(sample_size, n_samples)
-    sample_means = st.session_state[clt.SAMPLE_MEANS]
-    fig = ff.create_distplot([sample_means], group_labels=['Sample Means'], bin_size=0.1, show_rug=False)
-    st.markdown(f'#### Distribution of {n_samples} sample means using sample size {sample_size}.')
+    fig, title = clt.plotly_sample_means_chart()
+    st.markdown(title)
     st.plotly_chart(fig)
 
     theoretical_mean, theoretical_std = clt.get_theoretical_sample_means_mean(), clt.get_theoretical_sample_means_std()
-    actual_mean, actual_std = sample_means.mean(), sample_means.std()
+    actual_mean, actual_std = clt.sample_means().mean(), clt.sample_means().std()
     st.dataframe(pd.DataFrame({'Theoretical': [theoretical_mean, theoretical_std],
                                'Actual': [actual_mean, actual_std],
                                'Gap': [abs(theoretical_mean - actual_mean), abs(theoretical_std - actual_std)]},
