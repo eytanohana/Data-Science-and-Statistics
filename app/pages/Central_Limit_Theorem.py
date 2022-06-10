@@ -14,7 +14,7 @@ st.markdown('''The central theorem limit states that for *almost* any distributi
                means will look more and more normal.''')
 
 n_dist_values = 20
-st.subheader(f'Create a random distribution with {n_dist_values} distinct possible values')
+st.subheader(f'Create a random distribution from {n_dist_values} distinct possible values')
 if not clt.is_init():
     clt.init()
 
