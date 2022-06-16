@@ -72,7 +72,7 @@ def get_theoretical_sample_means_std():
 @st.cache(show_spinner=False)
 def plotly_distribution_chart(n_dist_values, mean, std):
     return px.bar(
-        x=st.session_state[DIST_VALS],
+        x=None if not (mean or std) else st.session_state[DIST_VALS],
         y=st.session_state[PROBS],
         range_x=(0, n_dist_values + 1),
         labels={'x': 'k', 'y': 'P(x=k)'},
