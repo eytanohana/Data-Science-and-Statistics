@@ -38,8 +38,10 @@ n_samples = int(b.number_input('Number of samples', value=500, step=100))
 if clt.has_distribution():
     with st.spinner(f'Generating {n_samples} sample means'):
         clt.generate_sample_means(sample_size, n_samples)
-    fig, title = clt.plotly_sample_means_chart()
-    st.markdown(title)
+    fig = clt.plotly_sample_means_chart(clt.sample_means(), 'Sample Means')
+
+    st.markdown(f'#### Distribution of {len(clt.sample_means())} sample '
+                f'means using sample size {n_samples}.')
     st.plotly_chart(fig)
 
     theoretical_mean, theoretical_std = clt.get_theoretical_sample_means_mean(), clt.get_theoretical_sample_means_std()
