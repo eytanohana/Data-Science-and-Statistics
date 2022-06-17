@@ -4,10 +4,10 @@ import numpy as np
 import sys
 
 sys.path.append('/app/data-science-and-statistics/streamlit_app/backend')
-from streamlit_app.backend import cov
 
 st.set_page_config(page_title='Data Science & Stats', page_icon='📉', layout='wide')
 st.write(sys.path)
+from streamlit_app.backend import cov
 
 st.header('Covariance and Correlation')
 
