@@ -96,7 +96,7 @@ with a:
     plt.ylim(0, 100)
     sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
     st.pyplot(fig)
-    st.markdown(f'#### Cov(X,Y) = {cov.covariance(x, y):.3f} | Corr(X,Y) = {cov.correlation(x, y):.3f}')
+    st.markdown(f'#### Cov(X,Y) = {cov.covariance(x, y):.4f} | Corr(X,Y) = {cov.correlation(x, y):.4f}')
 with b:
     x = np.linspace(0, 10, 500)
     y = 5 * x + np.random.normal(0, 1, 500)
@@ -106,4 +106,4 @@ with b:
     plt.ylim(0, 100)
     sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
     st.pyplot(fig)
-    st.markdown(f'#### Cov(X,Y) = {cov.covariance(x, y):.3f} | Corr(X,Y) = {cov.correlation(x, y):.3f}')
+    st.markdown(f'#### Cov(X,Y) = {cov.covariance(x, y):.4f} | Corr(X,Y) = {cov.correlation(x, y):.4f}')
