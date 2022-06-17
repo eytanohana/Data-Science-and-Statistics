@@ -20,19 +20,20 @@ st.markdown('''Covariance and Correlation describe the relationship between two 
 >ie when one variable increases and the other one either increases or decreases.
 ''')
 
+sns.set()
 a, b, c = st.columns(3)
 with a:
-    x = np.random.normal(loc=5, scale=2, size=500)
-    y = np.random.normal(loc=0, scale=7, size=500)
-    fig = plt.figure()
-    plt.title('Virtually 0 relationship', fontdict={'size': 20})
-    sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
-    st.pyplot(fig)
-with b:
     x = np.random.normal(loc=5, scale=2, size=500)
     y = 5 * x + np.random.normal(loc=0, scale=10, size=500)
     fig = plt.figure()
     plt.title('Positive relationship', fontdict={'size': 20})
+    sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
+    st.pyplot(fig)
+with b:
+    x = np.random.normal(loc=5, scale=2, size=500)
+    y = np.random.normal(loc=0, scale=7, size=500)
+    fig = plt.figure()
+    plt.title('No relationship', fontdict={'size': 20})
     sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
     st.pyplot(fig)
 with c:
