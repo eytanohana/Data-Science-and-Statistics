@@ -1,12 +1,8 @@
 import streamlit as st
-import seaborn as sns
-import matplotlib.pyplot as plt
+# import seaborn as sns
+# import matplotlib.pyplot as plt
 import numpy as np
 import sys
-
-sys.path.append('/app/data-science-and-statistics/streamlit_app/backend')
-sys.path.append('/app/data-science-and-statistics/streamlit_app')
-sys.path.append('/app/data-science-and-statistics')
 
 st.set_page_config(page_title='Data Science & Stats', page_icon='📉', layout='wide')
 st.write(sys.path)
