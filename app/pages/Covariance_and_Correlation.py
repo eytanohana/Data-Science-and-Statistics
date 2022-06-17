@@ -30,6 +30,7 @@ with a:
     plt.title('Positive relationship', fontdict={'size': 20})
     sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
     st.pyplot(fig)
+    st.markdown(f'**COV = {cov.covariance(x, y):.3f}, CORR = {cov.correlation(x, y):.3f}**')
 with b:
     x = np.random.normal(loc=5, scale=2, size=500)
     y = np.random.normal(loc=0, scale=7, size=500)
@@ -37,6 +38,7 @@ with b:
     plt.title('No relationship', fontdict={'size': 20})
     sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
     st.pyplot(fig)
+    st.markdown(f'**COV = {cov.covariance(x, y):.3f}, CORR = {cov.correlation(x, y):.3f}**')
 with c:
     x = np.random.normal(loc=5, scale=2, size=500)
     y = -5 * x + np.random.normal(loc=0, scale=10, size=500)
@@ -44,6 +46,7 @@ with c:
     plt.title('Negative relationship', fontdict={'size': 20})
     sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
     st.pyplot(fig)
+    st.markdown(f'**COV = {cov.covariance(x, y):.3f}, CORR = {cov.correlation(x, y):.3f}**')
 
 st.markdown('---')
 a, b = st.columns(2)
