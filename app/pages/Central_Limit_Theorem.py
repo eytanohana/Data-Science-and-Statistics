@@ -26,7 +26,7 @@ mean = clt.get_distribution_mean()
 std = clt.get_distribution_std()
 
 st.plotly_chart(
-    clt.plotly_distribution_chart(n_dist_values, mean, std)
+    clt.plotly_bar_chart(n_dist_values, mean, std)
 )
 st.button('Clear', on_click=clt.clear_distribution)
 
