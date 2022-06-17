@@ -9,7 +9,7 @@ st.write(sys.path)
 st.write(os.environ['PYTHONPATH'])
 sys.path.extend([f'{os.path.dirname(os.path.dirname(__file__))}/backend'])
 
-from app.backend import cov
+from streamlit_app.backend import cov
 
 st.set_page_config(page_title='Data Science & Stats', page_icon='📉', layout='wide')
 
