@@ -16,3 +16,14 @@ st.markdown('''Covariance and Correlation describe the relationship between two 
 >And if they dont move together at all then we say they have no relationship.
 >ie when one variable increases and the other one either increases or decreases.
 ''')
+a, b = st.columns(2)
+a.markdown('''
+**The covariance between two variables is defined by:**
+
+$$Cov(X,Y) = \\frac{1}{n-1}\\sum_{i=1}^{n}(x_i-\\bar{x})(y_i-\\bar{y} $$
+''')
+b.markdown('''
+**The correlation between two variables is defined by:**
+
+$$Corr(X,Y) = \\frac{Cov(X,Y)}{\\sigma_X \\sigma_Y}$$
+''')
