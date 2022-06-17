@@ -4,7 +4,7 @@ import numpy as np
 import sys
 
 sys.path.append('../')
-from streamlit_app.backend import cov
+# from streamlit_app.backend import cov
 
 st.set_page_config(page_title='Data Science & Stats', page_icon='📉', layout='wide')
 st.write(sys.path)
