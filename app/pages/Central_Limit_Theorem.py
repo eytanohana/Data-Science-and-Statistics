@@ -1,6 +1,6 @@
 import pandas as pd
 
-from .backend import clt
+from app.pages.backend import clt
 
 import streamlit as st
 

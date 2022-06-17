@@ -2,7 +2,7 @@ import streamlit as st
 import seaborn as sns
 import numpy as np
 from matplotlib import pyplot as plt
-from .backend import cov
+from app.pages.backend import cov
 
 st.set_page_config(page_title='Data Science & Stats', page_icon='📉', layout='wide')
 
