@@ -1,4 +1,7 @@
 import streamlit as st
+import seaborn as sns
+import numpy as np
+from matplotlib import pyplot as plt
 
 st.set_page_config(page_title='Data Science & Stats', page_icon='📉', layout='wide')
 
@@ -16,6 +19,30 @@ st.markdown('''Covariance and Correlation describe the relationship between two 
 >And if they dont move together at all then we say they have no relationship.
 >ie when one variable increases and the other one either increases or decreases.
 ''')
+
+a, b, c = st.columns(3)
+with a:
+    x = np.random.normal(loc=5, scale=2, size=500)
+    y = np.random.normal(loc=0, scale=7, size=500)
+    fig = plt.figure()
+    plt.title('Virtually 0 relationship', fontdict={'size': 20})
+    sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
+    st.pyplot(fig)
+with b:
+    x = np.random.normal(loc=5, scale=2, size=500)
+    y = 5 * x + np.random.normal(loc=0, scale=10, size=500)
+    fig = plt.figure()
+    plt.title('Positive relationship', fontdict={'size': 20})
+    sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
+    st.pyplot(fig)
+with c:
+    x = np.random.normal(loc=5, scale=2, size=500)
+    y = -5 * x + np.random.normal(loc=0, scale=10, size=500)
+    fig = plt.figure()
+    plt.title('Negative relationship', fontdict={'size': 20})
+    sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
+    st.pyplot(fig)
+
 a, b = st.columns(2)
 a.markdown('''
 **The covariance between two variables is defined by:**
