@@ -2,13 +2,6 @@ import streamlit as st
 import seaborn as sns
 import numpy as np
 from matplotlib import pyplot as plt
-import os
-import sys
-
-st.write(sys.path)
-st.write(os.environ['PYTHONPATH'])
-sys.path.extend([f'{os.path.dirname(os.path.dirname(__file__))}/backend'])
-
 from streamlit_app.backend import cov
 
 st.set_page_config(page_title='Data Science & Stats', page_icon='📉', layout='wide')
