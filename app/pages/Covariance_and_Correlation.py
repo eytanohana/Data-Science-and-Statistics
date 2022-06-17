@@ -2,6 +2,7 @@ import streamlit as st
 import seaborn as sns
 import numpy as np
 from matplotlib import pyplot as plt
+from app.backend import cov
 
 st.set_page_config(page_title='Data Science & Stats', page_icon='📉', layout='wide')
 
@@ -67,14 +68,14 @@ the data fits closer around the regression line.
 a, b = st.columns(2)
 with a:
     x = np.linspace(0, 10, 500)
-    y = 10 * x + np.random.normal(0, 10, 500)
+    y = 10 * x + np.random.normal(0, 20, 500)
     fig = plt.figure()
     plt.title('Stronger Slope', fontdict={'size': 20})
     plt.xlim(0, 10)
     plt.ylim(0, 100)
     sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
     st.pyplot(fig)
-    st.markdown()
+    st.markdown(f'#### Cov(X,Y) = {cov.covariance(x, y):.3f} | Corr(X,Y) = {cov.correlation(x, y):.3f}')
 with b:
     x = np.linspace(0, 10, 500)
     y = 5 * x + np.random.normal(0, 1, 500)
@@ -84,3 +85,4 @@ with b:
     plt.ylim(0, 100)
     sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
     st.pyplot(fig)
+    st.markdown(f'#### Cov(X,Y) = {cov.covariance(x, y):.3f} | Corr(X,Y) = {cov.correlation(x, y):.3f}')
