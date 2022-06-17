@@ -4,6 +4,7 @@ import numpy as np
 import sys
 
 sys.path.append('/app/data-science-and-statistics/streamlit_app/backend')
+sys.path.append('/app/data-science-and-statistics/streamlit_app')
 
 st.set_page_config(page_title='Data Science & Stats', page_icon='📉', layout='wide')
 st.write(sys.path)
