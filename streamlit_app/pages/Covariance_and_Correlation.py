@@ -1,7 +1,6 @@
 import streamlit as st
 # import seaborn as sns
 import numpy as np
-from matplotlib import pyplot as plt
 import sys
 
 sys.path.append('../')
