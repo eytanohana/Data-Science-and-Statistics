@@ -48,17 +48,31 @@ with c:
     st.pyplot(fig)
     st.markdown(f'**COV = {cov.covariance(x, y):.3f}, CORR = {cov.correlation(x, y):.3f}**')
 
-st.markdown('---')
+st.markdown("""
+---
+## So What's the difference between Covariance and Correlation?""")
+
 a, b = st.columns(2)
 a.markdown('''
 **The covariance between two variables is defined by:**
 
 $$Cov(X,Y) = \\frac{1}{n-1}\\sum_{i=1}^{n}(x_i-\\bar{x})(y_i-\\bar{y})$$
+
+**Covariance** only measures the direction of the relationship between the variables.
+Whether they have a positive, negative, or no relationship. The strength of the
+number itself does not give us any useful information. We only care about its sign.
 ''')
 b.markdown('''
 **The correlation between two variables is defined by:**
 
 $$Corr(X,Y) = \\frac{Cov(X,Y)}{\\sigma_X \\sigma_Y}$$
+
+**Correlation** measures the linearity of the relationship between the variables.
+Correlation always falls between -1 and 1. A Correlation of -1 means the variables
+form a perfect line with a negative slope, while +1 means the variables form a perfect line
+with a positive slope. A Correlation of 0 means the two variables are unrelated and either form
+a line with no slope or do not form a line at all but the line of best fit through the data has 0 slope.
+Like in the middle graph above.
 ''')
 
 st.markdown('''
