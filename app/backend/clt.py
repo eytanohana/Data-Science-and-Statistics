@@ -85,13 +85,14 @@ def plotly_bar_chart(n_dist_values, mean, std):
 
 
 @st.cache(show_spinner=False)
-def plotly_distribution_chart(sample_means, group_label, bin_size=0.1, ):
+def plotly_distribution_chart(sample_means, group_label, title, bin_size=0.1):
     fig = ff.create_distplot(
         [sample_means],
         group_labels=[group_label],
         bin_size=bin_size,
         show_rug=False
     )
+    fig.update_layout({'title': title})
     return fig
 
 

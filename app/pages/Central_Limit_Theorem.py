@@ -38,11 +38,17 @@ n_samples = int(b.slider('Number of samples', min_value=100, max_value=10_000, v
 if clt.has_distribution():
     with st.spinner(f'Generating {n_samples} sample means'):
         clt.generate_sample_means(sample_size, n_samples)
-    fig = clt.plotly_distribution_chart(clt.sample_means(), 'Sample Means')
-
-    st.markdown(f'#### Distribution of {len(clt.sample_means())} sample '
-                f'means using sample size {n_samples}.')
-    st.plotly_chart(fig)
+    a, b = st.columns(2)
+    with a:
+        fig = clt.plotly_distribution_chart(clt.sample_means(), 'Sample Means',
+                                            f'Distribution of {len(clt.sample_means())} sample means '
+                                            f'using sample size {sample_size}.')
+        st.plotly_chart(fig)
+    with b:
+        fig = clt.plotly_distribution_chart(clt.std_sample_means(), 'Standardized Sample Means',
+                                            f'Standardized Distribution of {len(clt.sample_means())} '
+                                            f'sample means using sample size {sample_size}.')
+        st.plotly_chart(fig)
 
     theoretical_mean, theoretical_std = clt.get_theoretical_sample_means_mean(), clt.get_theoretical_sample_means_std()
     actual_mean, actual_std = clt.sample_means().mean(), clt.sample_means().std()
