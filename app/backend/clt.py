@@ -7,6 +7,7 @@ VALUES = 'values'
 DIST_VALS = 'dist_vals'
 PROBS = 'probs'
 SAMPLE_MEANS = 'sample_means'
+STD_SAMPLE_MEANS = 'std_sample_means'
 SAMPLE_SIZE = 'sample_size'
 GENERATED_SAMPLE_MEANS = 'generate_sample_means'
 
@@ -20,6 +21,7 @@ def init():
     st.session_state[DIST_VALS] = np.array([])
     st.session_state[PROBS] = np.array([])
     st.session_state[SAMPLE_MEANS] = np.array([])
+    st.session_state[STD_SAMPLE_MEANS] = np.array([])
     st.session_state[SAMPLE_SIZE] = 0
     st.session_state[GENERATED_SAMPLE_MEANS] = False
 
@@ -47,6 +49,8 @@ def generate_sample_means(sample_size, n_samples):
                                                                 p=st.session_state[PROBS],
                                                                 size=sample_size).mean()
                                                for _ in range(n_samples)])
+    st.session_state[STD_SAMPLE_MEANS] = \
+        (st.session_state[SAMPLE_MEANS] - st.session_state[SAMPLE_MEANS].mean()) / st.session_state[SAMPLE_MEANS].std()
     st.session_state[SAMPLE_SIZE] = sample_size
 
 
@@ -93,3 +97,7 @@ def plotly_distribution_chart(sample_means, group_label, bin_size=0.1, ):
 
 def sample_means():
     return st.session_state[SAMPLE_MEANS]
+
+
+def std_sample_means():
+    return st.session_state[STD_SAMPLE_MEANS]
