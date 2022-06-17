@@ -44,11 +44,12 @@ with c:
     sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
     st.pyplot(fig)
 
+st.markdown('---')
 a, b = st.columns(2)
 a.markdown('''
 **The covariance between two variables is defined by:**
 
-$$Cov(X,Y) = \\frac{1}{n-1}\\sum_{i=1}^{n}(x_i-\\bar{x})(y_i-\\bar{y} $$
+$$Cov(X,Y) = \\frac{1}{n-1}\\sum_{i=1}^{n}(x_i-\\bar{x})(y_i-\\bar{y})$$
 ''')
 b.markdown('''
 **The correlation between two variables is defined by:**
