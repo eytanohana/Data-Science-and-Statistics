@@ -76,11 +76,15 @@ Like in the middle graph above.
 ''')
 
 st.markdown('''
+## Misconceptions about Correlation
 ---
-Covariance and Correlation measure how linear the relationship is between the two variables
-not how strongly they move together. For example, in the two graphs below, while the graph on
-the left has a  steeper slope, the graph on the right has a higher covariance/correlation because
-the data fits closer around the regression line. 
+Many people think correlation measure how strong the relationship is between the two variables
+(ie how large the slope is between the two variables). In reality, like mentioned above, Correlation
+measures the linearity between the variables. Meaning how well the two variables form a line with
+non-zero slope.
+
+For example, in the two graphs below, while the graph on the left has a  steeper slope, the graph
+on the right actually has a higher Correlation because the data fits closer around the regression line.
 ''')
 a, b = st.columns(2)
 with a:
