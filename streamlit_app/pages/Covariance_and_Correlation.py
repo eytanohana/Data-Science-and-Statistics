@@ -1,5 +1,5 @@
 import streamlit as st
-import seaborn as sns
+# import seaborn as sns
 import numpy as np
 from matplotlib import pyplot as plt
 import sys
@@ -8,6 +8,7 @@ sys.path.append('../')
 from streamlit_app.backend import cov
 
 st.set_page_config(page_title='Data Science & Stats', page_icon='📉', layout='wide')
+st.write(sys.path)
 
 st.header('Covariance and Correlation')
 
