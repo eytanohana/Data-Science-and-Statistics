@@ -56,3 +56,31 @@ b.markdown('''
 
 $$Corr(X,Y) = \\frac{Cov(X,Y)}{\\sigma_X \\sigma_Y}$$
 ''')
+
+st.markdown('''
+---
+Covariance and Correlation measure how linear the relationship is between the two variables
+not how strongly they move together. For example, in the two graphs below, while the graph on
+the left has a  steeper slope, the graph on the right has a higher covariance/correlation because
+the data fits closer around the regression line. 
+''')
+a, b = st.columns(2)
+with a:
+    x = np.linspace(0, 10, 500)
+    y = 10 * x + np.random.normal(0, 10, 500)
+    fig = plt.figure()
+    plt.title('Stronger Slope', fontdict={'size': 20})
+    plt.xlim(0, 10)
+    plt.ylim(0, 100)
+    sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
+    st.pyplot(fig)
+    st.markdown()
+with b:
+    x = np.linspace(0, 10, 500)
+    y = 5 * x + np.random.normal(0, 1, 500)
+    fig = plt.figure()
+    plt.title('Higher cov/corr', fontdict={'size': 20})
+    plt.xlim(0, 10)
+    plt.ylim(0, 100)
+    sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
+    st.pyplot(fig)
