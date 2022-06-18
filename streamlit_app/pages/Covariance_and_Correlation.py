@@ -1,12 +1,10 @@
 import streamlit as st
-# import seaborn as sns
-# import matplotlib.pyplot as plt
+import seaborn as sns
+import matplotlib.pyplot as plt
 import numpy as np
-import sys
+from backend import cov
 
 st.set_page_config(page_title='Data Science & Stats', page_icon='📉', layout='wide')
-st.write(sys.path)
-from streamlit_app.backend import cov
 
 st.header('Covariance and Correlation')
 
