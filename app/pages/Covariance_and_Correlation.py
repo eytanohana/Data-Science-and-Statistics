@@ -101,4 +101,5 @@ st.pyplot(fig)
 
 a, b = st.columns(2)
 a.markdown(f'#### Correlation(X,Y) = {cov.correlation(x, y):.4f}', unsafe_allow_html=True)
-b.markdown(f'#### <span style="color: blue">Correlation(X,Y) = {cov.correlation(xx, yy):.4f}</span>', unsafe_allow_html=True)
+b.markdown(f'#### <span style="color: blue">Correlation(X,Y) = {cov.correlation(xx, yy):.4f}</span>',
+           unsafe_allow_html=True)
