@@ -139,7 +139,7 @@ st.markdown('''
 ---
 ### A real world example
 
-Here we have a common dataset that tracks multiple measurements between different spe.
+Here we have a common dataset that tracks multiple measurements between different species of penguins.
 ''')
 penguins = sns.load_dataset('penguins')
 st.dataframe(penguins)
