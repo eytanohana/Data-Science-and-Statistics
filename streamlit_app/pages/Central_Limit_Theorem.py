@@ -3,7 +3,7 @@ import streamlit as st
 
 from backend import clt
 
-st.set_page_config(page_title='CLT', page_icon='📉', layout='wide')
+st.set_page_config(page_title='Data Science & Stats', page_icon='📉', layout='wide')
 
 st.header('The Central Limit Theorem')
 
