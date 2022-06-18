@@ -1,3 +1,4 @@
+from os.path import dirname, join
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
@@ -144,9 +145,7 @@ Here we have a common dataset that tracks multiple measurements between differen
 penguins = sns.load_dataset('penguins').dropna().reset_index(drop=True)
 a, b = st.columns(2)
 a.dataframe(penguins)
-with b:
-    with st.spinner('Generating pairplot...'):
-        st.pyplot(cov.pairplot(penguins, hue='species'))
+b.image(join(dirname(dirname(__file__)), 'images/penguins-pairplot.png'))
 
 st.markdown('''
 The plot above shows the relationship between every two numeric variable in the dataset.
