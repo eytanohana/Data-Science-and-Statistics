@@ -141,10 +141,13 @@ st.markdown('''
 
 Here we have a common dataset that tracks multiple measurements between different species of penguins.
 ''')
-penguins = sns.load_dataset('penguins')
+penguins = sns.load_dataset('penguins').dropna().reset_index(drop=True)
 a, b = st.columns(2)
 a.dataframe(penguins)
 with b:
     with st.spinner('Generating pairplot...'):
-        fig = sns.pairplot(penguins, hue='species')
-        st.pyplot(fig)
+        st.pyplot(cov.pairplot(penguins, hue='species'))
+
+st.markdown('''
+The plot above shows the relationship between every two numeric variable in the dataset.
+''')
