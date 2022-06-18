@@ -142,5 +142,9 @@ st.markdown('''
 Here we have a common dataset that tracks multiple measurements between different species of penguins.
 ''')
 penguins = sns.load_dataset('penguins')
-st.dataframe(penguins)
-st.pyplot(cov.pairplot(penguins))
+a, b = st.columns(2)
+a.dataframe(penguins)
+with b:
+    with st.spinner('Generating pairplot...'):
+        fig = sns.pairplot(penguins, hue='species')
+        st.pyplot(fig)
