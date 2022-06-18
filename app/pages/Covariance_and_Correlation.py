@@ -122,8 +122,8 @@ Now we'll generate some new random data. Pay attention to the covariance and cor
 as you choose the trend and scale of the randomly generated data.
 ''')
 a, b = st.columns(2)
-slope = a.slider('Trend', min_value=-10, max_value=10, help='The general slope of the data.')
-scale = b.slider('Scale', min_value=0, max_value=50, help='How scattered the data should be.')
+slope = a.slider('Trend', min_value=-10, max_value=10, value=-10, help='The general slope of the data.')
+scale = b.slider('Scale', min_value=0, max_value=50, value=20, help='How scattered the data should be.')
 x = np.linspace(0, 10, 500)
 y = slope * x + np.random.normal(0, scale, 500)
 fig = plt.figure(figsize=(10, 5))
