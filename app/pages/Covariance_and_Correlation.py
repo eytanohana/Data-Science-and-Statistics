@@ -90,7 +90,7 @@ Many people think Correlation measures how strong the relationship is between th
 measures the linearity between the variables. Meaning how well the two variables form a line with
 non-zero slope.
 
-For example, in the graph below, the black line has a steeper slope but the blue line
+For example, in the graph below, the red line has a steeper slope but the blue line
 actually has a higher Correlation because the data fits closer around it.
 ''')
 x = np.linspace(0, 10, 500)
@@ -100,13 +100,14 @@ yy = 5 * x + np.random.normal(0, 1, 500)
 fig = plt.figure(figsize=(10, 5))
 plt.xlim(0, 10)
 plt.ylim(0, 100)
-sns.regplot(x, y, ci=None, line_kws={'color': 'k', 'label': 'Stronger Slope'})
+sns.regplot(x, y, ci=None, line_kws={'color': 'red', 'label': 'Stronger Slope'})
 sns.regplot(xx, yy, ci=None, line_kws={'color': 'blue', 'label': 'Stronger Correlation'})
 plt.legend()
 st.pyplot(fig)
 
 a, b = st.columns(2)
-a.markdown(f'#### Correlation(X,Y) = {cov.correlation(x, y):.4f}', unsafe_allow_html=True)
+a.markdown(f'#### <span style="color: red">Correlation(X,Y) = {cov.correlation(x, y):.4f}</span>',
+           unsafe_allow_html=True)
 b.markdown(f'#### <span style="color: blue">Correlation(X,Y) = {cov.correlation(xx, yy):.4f}</span>',
            unsafe_allow_html=True)
 
