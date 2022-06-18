@@ -1,6 +1,4 @@
 import numpy as np
-import streamlit as st
-import seaborn as sns
 
 
 def covariance(x, y):
@@ -9,7 +7,3 @@ def covariance(x, y):
 
 def correlation(x, y):
     return covariance(x, y) / (x.std() * y.std())
-
-@st.cache
-def pairplot(data):
-    return sns.pairplot(data)
