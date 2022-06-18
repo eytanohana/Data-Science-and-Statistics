@@ -22,6 +22,8 @@ st.markdown('''Covariance and Correlation describe the relationship between two 
 >ie when one variable increases and the other one either increases or decreases.
 ''')
 
+############################################################################################################
+
 sns.set()
 a, b, c = st.columns(3)
 with a:
@@ -48,6 +50,8 @@ with c:
     sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
     st.pyplot(fig)
     st.markdown(f'**COV = {cov.covariance(x, y):.3f}, CORR = {cov.correlation(x, y):.3f}**')
+
+############################################################################################################
 
 st.markdown("""
 ---
@@ -76,6 +80,8 @@ a line with no slope or do not form a line at all but the line of best fit throu
 Like in the middle graph above.
 ''')
 
+############################################################################################################
+
 st.markdown('''
 ## Misconceptions about Correlation
 ---
@@ -103,3 +109,5 @@ a, b = st.columns(2)
 a.markdown(f'#### Correlation(X,Y) = {cov.correlation(x, y):.4f}', unsafe_allow_html=True)
 b.markdown(f'#### <span style="color: blue">Correlation(X,Y) = {cov.correlation(xx, yy):.4f}</span>',
            unsafe_allow_html=True)
+
+############################################################################################################
