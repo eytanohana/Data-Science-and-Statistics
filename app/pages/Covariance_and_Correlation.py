@@ -132,3 +132,15 @@ plt.ylim(-100, 100)
 sns.regplot(x, y, ci=None, line_kws={'color': 'black'})
 plt.legend()
 st.pyplot(fig)
+
+############################################################################################################
+
+st.markdown('''
+---
+### A real world example
+
+Here we have a common dataset that tracks multiple measurements between different spe.
+''')
+penguins = sns.load_dataset('penguins')
+st.dataframe(penguins)
+st.pyplot(cov.pairplot(penguins))
