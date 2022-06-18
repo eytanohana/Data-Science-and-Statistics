@@ -1,7 +1,8 @@
-import streamlit as st
-import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
+import seaborn as sns
+import streamlit as st
+
 from backend import cov
 
 st.set_page_config(page_title='Data Science & Stats', page_icon='📉', layout='wide')
