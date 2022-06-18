@@ -1,8 +1,7 @@
 import pandas as pd
+import streamlit as st
 
 from backend import clt
-
-import streamlit as st
 
 st.set_page_config(page_title='CLT', page_icon='📉', layout='wide')
 
