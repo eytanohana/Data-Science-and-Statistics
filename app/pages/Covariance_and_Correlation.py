@@ -147,7 +147,7 @@ a.dataframe(penguins)
 b.image(join(dirname(dirname(__file__)), 'images/penguins-pairplot.png'))
 
 st.markdown('''
-The plot above (known as a pairplot) shows the relationship between every two numeric variable in the dataset.
+The plot above (known as a pairplot) shows the relationship between every pair of numeric variable in the dataset.
 From looking at the plot we can tell there's a positive correlation between body mass and flipper length.
 
 This dataset is relatively small so we can generate a nice pairplot to visualize the relationship
@@ -155,6 +155,19 @@ between each variable, but when we have a larger dataset creating a graph like a
 expensive and time consuming. Even for this dataset, constantly regenerating this same pairplot 
 slows down the app too much, which is why I ended up saving the plot as an image ;)
 
-For larger datasets we can create a **Correlation Matrix** to display a heatmap showing the relationship
-between all the variables in a much less expensive way.
+For larger datasets we can create a **Correlation Matrix** to display a heatmap **showing the relationship
+between all the variables** in a much less expensive way.
 ''')
+
+penguin_corr = penguins.corr()
+a, b = st.columns(2)
+with a:
+    st.title('The correlation matrix')
+    st.dataframe(penguin_corr)
+    st.markdown('''
+    **remember! The correlation matrix describes the correlation between every pair of variables in the dataset.**''')
+with b:
+    fig = plt.figure()
+    sns.heatmap(penguin_corr, vmin=-1, vmax=1, cmap='ocean', annot=True, linewidths=1, linecolor='k')
+    st.pyplot(fig)
+
