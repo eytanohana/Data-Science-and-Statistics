@@ -1,11 +1,11 @@
-from os.path import dirname, join
+from os import path
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 import streamlit as st
 
 from backend import cov
-
+IMAGES_PATH = path.join(path.dirname(path.dirname(__file__)), 'images')
 st.set_page_config(page_title='Data Science & Stats', page_icon='📉', layout='wide')
 
 st.header('Covariance and Correlation')
@@ -138,13 +138,16 @@ st.pyplot(fig)
 st.markdown('''
 ---
 ### A real world example
-
+''')
+a, b = st.columns(2)
+a.image(path.join(IMAGES_PATH, 'penguins.jpg'))
+b.markdown('''
 Here we have a common dataset that tracks multiple measurements between different species of penguins.
 ''')
 penguins = sns.load_dataset('penguins').dropna().reset_index(drop=True)
 a, b = st.columns(2)
 a.dataframe(penguins)
-b.image(join(dirname(dirname(__file__)), 'images/penguins-pairplot.png'))
+b.image(path.join(IMAGES_PATH, 'penguins-pairplot.png'))
 
 st.markdown('''
 The plot above (known as a pairplot) shows the relationship between every pair of numeric variable in the dataset.
