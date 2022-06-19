@@ -202,3 +202,4 @@ st.markdown('''
 Even though the first heatmap showed some features had a seemingly negative correlation, only
 by massaging the data and trying to visualize it as many ways as possible can we start to get
 the whole picture of what's really going on.''')
+st.image(path.join(IMAGES_PATH, 'penguins-pairplot-species.png'), width=750)
