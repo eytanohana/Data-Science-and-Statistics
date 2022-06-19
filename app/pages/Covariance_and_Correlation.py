@@ -140,9 +140,12 @@ st.markdown('''
 ### A real world example
 ''')
 a, b = st.columns(2)
-a.image(path.join(IMAGES_PATH, 'penguins.jpg'))
+a.image(path.join(IMAGES_PATH, 'penguin-bill.png'), width=500)
 b.markdown('''
-Here we have a common dataset that tracks multiple measurements between different species of penguins.
+Here we have a common dataset that contains multiple measurements between 3 different species of penguins
+in Antarctica. The dataset measures bill length, bill depth, flipper length, and body mass in both
+Male and Female penguins. We'll use a couple techniques to visualize the data and see which features are
+correlated, if any at all.
 ''')
 penguins = sns.load_dataset('penguins').dropna().reset_index(drop=True)
 a, b = st.columns(2)
