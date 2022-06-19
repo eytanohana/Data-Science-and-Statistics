@@ -147,11 +147,13 @@ Here we have a common dataset that tracks multiple measurements between differen
 penguins = sns.load_dataset('penguins').dropna().reset_index(drop=True)
 a, b = st.columns(2)
 a.dataframe(penguins)
+a.markdown('''
+The plot to the right (known as a pairplot) helps to visualize the relationship between every pair of numeric variable in the dataset.
+From looking at the plot we can tell there's a positive correlation between body mass and flipper length.
+''')
 b.image(path.join(IMAGES_PATH, 'penguins-pairplot.png'))
 
 st.markdown('''
-The plot above (known as a pairplot) shows the relationship between every pair of numeric variable in the dataset.
-From looking at the plot we can tell there's a positive correlation between body mass and flipper length.
 
 This dataset is relatively small so we can generate a nice pairplot to visualize the relationship
 between each variable, but when we have a larger dataset creating a graph like above can be resource
