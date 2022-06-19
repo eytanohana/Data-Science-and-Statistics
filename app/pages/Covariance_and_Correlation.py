@@ -131,7 +131,6 @@ plt.title(f'Cov = {cov.covariance(x, y)} | Corr = {cov.correlation(x, y)}')
 plt.xlim(0, 10)
 plt.ylim(-100, 100)
 sns.regplot(x, y, ci=None, line_kws={'color': 'black'})
-plt.legend()
 st.pyplot(fig)
 
 ############################################################################################################
