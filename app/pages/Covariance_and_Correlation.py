@@ -194,9 +194,7 @@ with a:
     sns.heatmap(spec_df.corr(), vmin=-1, vmax=1, cmap='ocean', annot=True, linewidths=1, linecolor='k')
     st.pyplot(fig)
 with b:
-    with st.spinner(f'Generating {spec} pairplot...'):
-        fig = sns.pairplot(spec_df)
-        st.pyplot(fig)
+    st.image(path.join(IMAGES_PATH, f'{spec}-pairplot.png'))
 
 st.markdown('''
 Even though the first heatmap showed some features had a seemingly negative correlation, only
