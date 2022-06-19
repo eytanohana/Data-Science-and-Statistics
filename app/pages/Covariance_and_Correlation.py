@@ -5,7 +5,10 @@ import seaborn as sns
 import streamlit as st
 
 from backend import cov
+
 IMAGES_PATH = path.join(path.dirname(path.dirname(__file__)), 'images')
+DATA_POINTS = 200
+
 st.set_page_config(page_title='Data Science & Stats', page_icon='📉', layout='wide')
 
 st.header('Covariance and Correlation')
@@ -28,24 +31,24 @@ st.markdown('''Covariance and Correlation describe the relationship between two 
 sns.set()
 a, b, c = st.columns(3)
 with a:
-    x = np.random.normal(loc=5, scale=2, size=500)
-    y = 5 * x + np.random.normal(loc=0, scale=10, size=500)
+    x = np.random.normal(loc=5, scale=2, size=DATA_POINTS)
+    y = 5 * x + np.random.normal(loc=0, scale=10, size=DATA_POINTS)
     fig = plt.figure()
     plt.title('Positive relationship', fontdict={'size': 20})
     sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
     st.pyplot(fig)
     st.markdown(f'**COV = {cov.covariance(x, y):.3f}, CORR = {cov.correlation(x, y):.3f}**')
 with b:
-    x = np.random.normal(loc=5, scale=2, size=500)
-    y = np.random.normal(loc=0, scale=7, size=500)
+    x = np.random.normal(loc=5, scale=2, size=DATA_POINTS)
+    y = np.random.normal(loc=0, scale=7, size=DATA_POINTS)
     fig = plt.figure()
     plt.title('No relationship', fontdict={'size': 20})
     sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
     st.pyplot(fig)
     st.markdown(f'**COV = {cov.covariance(x, y):.3f}, CORR = {cov.correlation(x, y):.3f}**')
 with c:
-    x = np.random.normal(loc=5, scale=2, size=500)
-    y = -5 * x + np.random.normal(loc=0, scale=10, size=500)
+    x = np.random.normal(loc=5, scale=2, size=DATA_POINTS)
+    y = -5 * x + np.random.normal(loc=0, scale=10, size=DATA_POINTS)
     fig = plt.figure()
     plt.title('Negative relationship', fontdict={'size': 20})
     sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
@@ -94,10 +97,10 @@ non-zero slope.
 For example, in the graph below, the red line has a steeper slope but the blue line
 actually has a higher Correlation because the data fits closer around it.
 ''')
-x = np.linspace(0, 10, 500)
-y = 10 * x + np.random.normal(0, 20, 500)
-xx = np.linspace(0, 10, 500)
-yy = 5 * x + np.random.normal(0, 1, 500)
+x = np.linspace(0, 10, DATA_POINTS)
+y = 10 * x + np.random.normal(0, 20, DATA_POINTS)
+xx = np.linspace(0, 10, DATA_POINTS)
+yy = 5 * x + np.random.normal(0, 4, DATA_POINTS)
 fig = plt.figure(figsize=(10, 5))
 plt.xlim(0, 10)
 plt.ylim(0, 100)
@@ -124,8 +127,8 @@ as you choose the trend and scale of the randomly generated data.
 a, b = st.columns(2)
 slope = a.slider('Trend', min_value=-10, max_value=10, value=-10, help='The general slope of the data.')
 scale = b.slider('Scale', min_value=0, max_value=50, value=20, help='How scattered the data should be.')
-x = np.linspace(0, 10, 500)
-y = slope * x + np.random.normal(0, scale, 500)
+x = np.linspace(0, 10, DATA_POINTS)
+y = slope * x + np.random.normal(0, scale, DATA_POINTS)
 fig = plt.figure(figsize=(10, 5))
 plt.title(f'Cov = {cov.covariance(x, y)} | Corr = {cov.correlation(x, y)}')
 plt.xlim(0, 10)
