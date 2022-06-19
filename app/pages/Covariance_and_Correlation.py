@@ -198,3 +198,7 @@ with b:
         fig = sns.pairplot(spec_df)
         st.pyplot(fig)
 
+st.markdown('''
+Even though the first heatmap showed some features had a seemingly negative correlation, only
+by massaging the data and trying to visualize it as many ways as possible can we start to get
+the whole picture of what's really going on.''')
