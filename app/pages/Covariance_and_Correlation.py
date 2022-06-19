@@ -179,3 +179,22 @@ with b:
     sns.heatmap(penguin_corr, vmin=-1, vmax=1, cmap='ocean', annot=True, linewidths=1, linecolor='k')
     st.pyplot(fig)
 
+st.markdown('''From the heatmap it looks like bill depth and flipper length or bill depth and body mass
+are negatively correlated; but if you look at the pairplot above again, what we really see is 3
+distinct species of penguins where bill depth and flipper length/body mass are actually
+positively correlated. We can see this if we view their individual heatmaps''')
+
+species = penguins.species.unique()
+a, b = st.columns(2)
+
+with a:
+    spec = st.selectbox('Species', options=species)
+    spec_df = penguins[penguins.species == spec]
+    fig = plt.figure()
+    sns.heatmap(spec_df.corr(), vmin=-1, vmax=1, cmap='ocean', annot=True, linewidths=1, linecolor='k')
+    st.pyplot(fig)
+with b:
+    with st.spinner(f'Generating {spec} pairplot...'):
+        fig = sns.pairplot(spec_df)
+        st.pyplot(fig)
+
