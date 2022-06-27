@@ -1,5 +1,7 @@
 import streamlit as st
 
+from backend import dist
+
 st.set_page_config(page_title='Data Science & Stats', page_icon='📉', layout='wide')
 
 
@@ -24,3 +26,9 @@ a, b, c = st.columns(3)
 a.markdown('$P(X=k)=\\frac{1}{b-a+1}\;\\textrm{, for } k = a, ..., b$')
 b.markdown('$E(X) = \\frac{a+b}{2}$')
 c.markdown('$V(X) = \\frac{(b - a + 1)^2 - 1}{12}$')
+
+a, b = st.columns(2)
+start = a.slider('a', min_value=1, max_value=5, value=1)
+end = b.slider('b', min_value=6, max_value=10, value=6)
+st.pyplot(dist.Uniform.plot_dist(start, end))
+
