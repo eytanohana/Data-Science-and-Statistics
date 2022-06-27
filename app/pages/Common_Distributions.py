@@ -15,6 +15,7 @@ There are two types of distributions.
 **Continuous Distributions** are distributions that can contain any value like 1.3 or 13.059
 
 ## Common Discrete Distributions
+---
 ''')
 
 st.markdown('''
@@ -32,6 +33,7 @@ end = b.slider('b', min_value=6, max_value=10, value=6)
 st.pyplot(dist.Uniform.plot_dist(start, end))
 
 st.markdown('''
+---
 ###  The Binomial Distribution $X \sim B(n, p)$
 > X is a random variable that counts the number of successes out of $n$
 >independent events with the same probability $p$ for success.
