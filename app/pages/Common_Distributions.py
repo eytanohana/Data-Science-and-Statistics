@@ -4,7 +4,6 @@ from backend import dist
 
 st.set_page_config(page_title='Data Science & Stats', page_icon='📉', layout='wide')
 
-
 st.markdown('''
 # Distributions
 A **Distribution** is just a set of values and the probabilities of getting those values.
@@ -19,7 +18,7 @@ There are two types of distributions.
 ''')
 
 st.markdown('''
-### The Uniform distribution $X \sim U(a, b)$
+### The Uniform Distribution $X \sim U(a, b)$
 > X is a random variable that takes on discrete values between a and b with equal probability.
 ''')
 a, b, c = st.columns(3)
@@ -32,3 +31,12 @@ start = a.slider('a', min_value=1, max_value=5, value=1)
 end = b.slider('b', min_value=6, max_value=10, value=6)
 st.pyplot(dist.Uniform.plot_dist(start, end))
 
+st.markdown('''
+###  The Binomial Distribution $X \sim B(n, p)$
+> X is a random variable that counts the number of successes out of $n$
+>independent events with the same probability $p$ for success.
+''')
+a, b, c = st.columns(3)
+a.markdown('$P(X=k)={n \choose k} p^k (1-p)^{n-k}\;\\textrm{, for } k = 0, 1,  ..., n$')
+b.markdown('$E(X) = np$')
+c.markdown('$V(X) = np(1-p)$')
