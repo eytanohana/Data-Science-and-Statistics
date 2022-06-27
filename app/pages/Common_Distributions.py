@@ -52,11 +52,14 @@ st.markdown('''
 > X is a random variable that counts the number of "special" items taken from
 >choosing $N$ times out of a total population size of $M$ without replacement.
 ''')
-# a, b, c = st.columns(3)
-# a.markdown('$P(X=k)={n \choose k} p^k (1-p)^{n-k}\;\\textrm{, for } k = 0, 1,  ..., n$')
-# b.markdown('$E(X) = np$')
-# c.markdown('$V(X) = np(1-p)$')
-# a, b = st.columns(2)
-# n = a.slider('n', min_value=0, max_value=30, value=15)
-# p = b.slider('p', min_value=0.0, max_value=1.0, value=0.5)
-# st.pyplot(dist.Binomial.plot_dist(n, p))
+a, b, c = st.columns(3)
+a.markdown('$P(X=k)=\large{\\frac{{n \choose k}{M-n \choose N-k}}{M \choose N}}'
+           '\\textrm{ for } k =\\textrm{max}(0,N-(M-n)),...,\\textrm{min}(N, n)$')
+b.markdown('$E(X) = N\\frac{n}{M}$')
+c.markdown('$V(X) = \\frac{M-N}{M-1}N\\frac{n}{M}(1 - \\frac{n}{M})$')
+a, b, c = st.columns(3)
+M = a.slider('M', min_value=50, max_value=100, value=50)
+n = b.slider('n', min_value=0, max_value=50, value=30)
+N = c.slider('N', min_value=0, max_value=50, value=30)
+
+st.pyplot(dist.Hypergeometric.plot_dist(M, n, N))

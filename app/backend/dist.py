@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from scipy.stats import binom
+from scipy.stats import binom, hypergeom
 
 PROPS = dict(boxstyle='round', facecolor='wheat', alpha=0.5)
 
@@ -20,7 +20,7 @@ class Uniform:
         plt.text(0.01, 0.95, text, transform=plt.gca().transAxes, fontsize=10,
                  verticalalignment='top', bbox=PROPS)
         plt.grid(ls='dashed')
-        plt.title(f'Uniform distribution from {a} to {b}', fontsize=15)
+        plt.title(f'Uniform distribution from {a} to {b}', fontsize=6)
         plt.ylim(0, 1)
         return fig
 
@@ -37,9 +37,8 @@ class Binomial:
 
     @classmethod
     def plot_dist(cls, n, p):
-        dist = binom(n, p)
         k = np.arange(0, n+1)
-        pmf = dist.pmf(k)
+        pmf = binom(n, p).pmf(k)
         fig = plt.figure(figsize=(5, 2))
         sns.barplot(k, pmf, color='cadetblue')
         text = f'E(X) = {cls.expectation(n, p):.2f}\nV(X) = {cls.variance(n, p)}'
@@ -48,7 +47,7 @@ class Binomial:
         plt.text(0.01, 0.95, text, transform=plt.gca().transAxes, fontsize=10,
                  verticalalignment='top', bbox=PROPS)
         plt.grid(ls='dashed')
-        plt.title(f'Binomial distribution with {n=} and {p=}', fontsize=15)
+        plt.title(f'Binomial distribution with {n=} and {p=}', fontsize=6)
         plt.ylim(0, 1)
         return fig
 
@@ -59,3 +58,31 @@ class Binomial:
     @staticmethod
     def variance(n, p):
         return n * p * (1 - p)
+
+
+class Hypergeometric:
+
+    @classmethod
+    def plot_dist(cls, M, n, N):
+        k = np.arange(max(0, N - M + n), min(n, N) + 1)
+        pmf = hypergeom(M, n, N).pmf(k)
+        fig = plt.figure(figsize=(5, 2))
+        sns.barplot(k, pmf, color='cadetblue')
+        text = f'E(X) = {cls.expectation(M, n, N):.2f}\nV(X) = {cls.variance(M, n, N)}'
+        plt.xticks(fontsize=5)
+        plt.yticks(fontsize=5)
+        plt.text(0.01, 0.95, text, transform=plt.gca().transAxes, fontsize=10,
+                 verticalalignment='top', bbox=PROPS)
+        plt.grid(ls='dashed')
+        plt.title(f'Hypergeometric distribution with {M=} elements and {n=} specials choosing {N=} times', fontsize=6)
+        plt.ylim(0, 1)
+        return fig
+
+    @staticmethod
+    def expectation(M, n, N):
+        return N * n / M
+
+    @staticmethod
+    def variance(M, n, N):
+        return (M - N) / (M - 1) * N * n / M * (1 - n / M)
+
