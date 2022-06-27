@@ -16,3 +16,11 @@ There are two types of distributions.
 ## Common Discrete Distributions
 ''')
 
+st.markdown('''
+### The Uniform distribution $X \sim U(a, b)$
+> X is a random variable that takes on discrete values between a and b with equal probability.
+''')
+a, b, c = st.columns(3)
+a.markdown('$P(X=k)=\\frac{1}{b-a+1}\;\\textrm{, for } k = a, ..., b$')
+b.markdown('$E(X) = \\frac{a+b}{2}$')
+c.markdown('$V(X) = \\frac{(b - a + 1)^2 - 1}{12}$')
