@@ -61,5 +61,19 @@ a, b, c = st.columns(3)
 M = a.slider('M', min_value=50, max_value=100, value=50)
 n = b.slider('n', min_value=0, max_value=50, value=30)
 N = c.slider('N', min_value=0, max_value=50, value=30)
-
 st.pyplot(dist.Hypergeometric.plot_dist(M, n, N))
+
+st.markdown('''
+---
+###  The Geometric Distribution $X \sim G(p)$
+> X is a random variable that counts the number of attempts up til and including the first
+>"success" in an independent series of attempts with the same chance for success, $p$.
+''')
+a, b, c = st.columns(3)
+a.markdown('$P(X=k)=(1-p)^{k-1}p'
+           '\\textrm{ for } k = 1,2,3,...$')
+b.markdown('$E(X) = \\frac{1}{p}$')
+c.markdown('$V(X) = \\frac{1-p}{p^2}$')
+p = st.slider('p', min_value=0.0, max_value=1.0, value=0.5, step=0.05)
+
+st.pyplot(dist.Geometric.plot_dist(p))
