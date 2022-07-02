@@ -105,3 +105,8 @@ b.markdown('$E(X) = \lambda$')
 c.markdown('$V(X) = \lambda$')
 rate = st.slider('λ', min_value=1.0, max_value=20.0, step=0.1)
 st.pyplot(dist.Poisson.plot_dist(rate))
+
+st.markdown('''
+## Continuous Distributions
+---
+''')
