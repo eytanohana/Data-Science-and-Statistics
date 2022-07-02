@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from scipy.stats import binom, hypergeom, geom, nbinom
+from scipy.stats import binom, hypergeom, geom, nbinom, poisson
 
 PROPS = dict(boxstyle='round', facecolor='wheat', alpha=0.5)
 
@@ -139,3 +139,30 @@ class NegativeBinomial:
     @staticmethod
     def variance(n, p):
         return n * (1 - p) / p**2
+
+
+class Poisson:
+
+    @classmethod
+    def plot_dist(cls, rate):
+        k = np.arange(0, rate + 21, dtype=int)
+        pmf = poisson(rate).pmf(k)
+        fig = plt.figure(figsize=(5, 2))
+        sns.barplot(k, pmf, color='cadetblue')
+        text = f'E(X) = {cls.expectation(rate):.2f}\nV(X) = {cls.variance(rate)}'
+        plt.xticks(fontsize=5, rotation=50)
+        plt.yticks(fontsize=5)
+        plt.text(0.01, 0.95, text, transform=plt.gca().transAxes, fontsize=10,
+                 verticalalignment='top', bbox=PROPS)
+        plt.grid(ls='dashed')
+        plt.title(f'Poisson distribution for λ = {rate}', fontsize=6)
+        plt.ylim(0, 1)
+        return fig
+
+    @staticmethod
+    def expectation(rate):
+        return rate
+
+    @staticmethod
+    def variance(rate):
+        return rate

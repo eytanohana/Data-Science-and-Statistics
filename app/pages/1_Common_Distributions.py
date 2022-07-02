@@ -92,3 +92,16 @@ a, b = st.columns(2)
 n = a.slider('n', min_value=1, max_value=50)
 p = b.slider('p', min_value=0.0, max_value=1.0, value=0.5, step=0.05, key='nbp')
 st.pyplot(dist.NegativeBinomial.plot_dist(n, p))
+
+st.markdown('''
+---
+###  The Poisson Distribution $X \sim P(\lambda)$
+> $X$ is a random variable that counts the number of events that occur
+> in a specific interval of time when the events occur at some constant rate, $\lambda$.
+''')
+a, b, c = st.columns(3)
+a.markdown('$P(X=k)=\large{\\frac{\lambda^k}{k!}}e^{-\lambda} \;\\textrm{ for } k = 0, 1, 2, ...$')
+b.markdown('$E(X) = \lambda$')
+c.markdown('$V(X) = \lambda$')
+rate = st.slider('λ', min_value=1.0, max_value=20.0, step=0.1)
+st.pyplot(dist.Poisson.plot_dist(rate))
