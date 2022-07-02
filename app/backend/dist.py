@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from scipy.stats import binom, hypergeom, geom
+from scipy.stats import binom, hypergeom, geom, nbinom
 
 PROPS = dict(boxstyle='round', facecolor='wheat', alpha=0.5)
 
@@ -112,3 +112,30 @@ class Geometric:
     @staticmethod
     def variance(p):
         return (1 - p) / p**2
+
+
+class NegativeBinomial:
+
+    @classmethod
+    def plot_dist(cls, n, p):
+        k = np.arange(n, n + 70)
+        pmf = nbinom(n, p, loc=n).pmf(k)
+        fig = plt.figure(figsize=(5, 2))
+        sns.barplot(k, pmf, color='cadetblue')
+        text = f'E(X) = {cls.expectation(n, p):.2f}\nV(X) = {cls.variance(n, p)}'
+        plt.xticks(fontsize=5, rotation=50)
+        plt.yticks(fontsize=5)
+        plt.text(0.01, 0.95, text, transform=plt.gca().transAxes, fontsize=10,
+                 verticalalignment='top', bbox=PROPS)
+        plt.grid(ls='dashed')
+        plt.title(f'Negative Binomial distribution for {n=} successes with probability {p=} for success', fontsize=6)
+        plt.ylim(0, 1)
+        return fig
+
+    @staticmethod
+    def expectation(n, p):
+        return n / p
+
+    @staticmethod
+    def variance(n, p):
+        return n * (1 - p) / p**2

@@ -76,3 +76,19 @@ b.markdown('$E(X) = \\frac{1}{p}$')
 c.markdown('$V(X) = \\frac{1-p}{p^2}$')
 p = st.slider('p', min_value=0.0, max_value=1.0, value=0.5, step=0.05)
 st.pyplot(dist.Geometric.plot_dist(p))
+
+st.markdown('''
+---
+###  The Negative Binomial Distribution $X \sim NB(n, p)$
+> $X$ is a random variable that counts the number of attempts up until and
+> including the $n^{th}$ success, in an independent series of attempts with the same chance for success, $p$.
+
+''')
+a, b, c = st.columns(3)
+a.markdown('$P(X=k)={k-1 \choose n-1} p^n (1-p)^{k-n} \;\\textrm{ for } k = n, n+1, n+2, ...$')
+b.markdown('$E(X) = \\frac{n}{p}$')
+c.markdown('$V(X) = n\\frac{1-p}{p^2}$')
+a, b = st.columns(2)
+n = a.slider('n', min_value=1, max_value=50)
+p = b.slider('p', min_value=0.0, max_value=1.0, value=0.5, step=0.05, key='nbp')
+st.pyplot(dist.NegativeBinomial.plot_dist(n, p))
