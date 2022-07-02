@@ -75,5 +75,4 @@ a.markdown('$P(X=k)=(1-p)^{k-1}p'
 b.markdown('$E(X) = \\frac{1}{p}$')
 c.markdown('$V(X) = \\frac{1-p}{p^2}$')
 p = st.slider('p', min_value=0.0, max_value=1.0, value=0.5, step=0.05)
-
 st.pyplot(dist.Geometric.plot_dist(p))
