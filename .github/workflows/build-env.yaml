@@ -1,0 +1,21 @@
+name: Build Environment
+
+defaults:
+  run:
+    shell: bash
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  Test-Job-1:
+    name: Test Job 1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: say hi
+        run: echo "hello world"
+        
