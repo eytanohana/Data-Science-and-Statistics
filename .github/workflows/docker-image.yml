@@ -21,6 +21,9 @@ jobs:
   deploy:
     name: Push Image
     needs: build
+    runs-on: ubuntu-latest
+
+    steps:
     - name: Docker Login
       run: docker login -u eohana98 -p ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
     - name: Docker push
