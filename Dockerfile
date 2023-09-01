@@ -8,9 +8,9 @@ RUN apt-get update && apt-get install -y \
     software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 
-ENV VIRTUAL_ENV=/app/venv
+ENV VIRTUAL_ENV=/venv
 RUN python3 -m venv $VIRTUAL_ENV
-RUN source $VIRTUAL_ENV/bin/activate
+RUN . $VIRTUAL_ENV/bin/activate
 RUN echo $PATH
 
 COPY requirements.txt ./requirements.txt
