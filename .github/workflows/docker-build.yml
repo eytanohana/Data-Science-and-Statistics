@@ -1,0 +1,16 @@
+name: Docker Image CI
+
+on: [pull_request, workflow_call]
+
+jobs:
+
+  build:
+    name: Build Image
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build Image
+      run: docker build . --file Dockerfile --tag eohana98/streamlit-stats:latest --tag eohana98/streamlit-stats:${{ github.run_number }}
+

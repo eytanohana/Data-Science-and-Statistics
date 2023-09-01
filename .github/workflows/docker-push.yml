@@ -3,26 +3,16 @@ name: Docker Image CI
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
 
 jobs:
 
   build:
-    name: Build Image
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build Image
-      run: docker build . --file Dockerfile --tag eohana98/streamlit-stats:latest --tag eohana98/streamlit-stats:${{ github.run_number }}
+    uses: ./.github/workflows/docker-build.yml
 
   deploy:
     name: Push Image
     needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged
 
     steps:
     - name: Docker Login
