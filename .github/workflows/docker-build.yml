@@ -75,7 +75,7 @@ jobs:
           END
 
       - name: Pull latest image
-        run: ssh ec2 'docker pull eohana98/streamlit-stats:latest'
+        run: ssh ec2 "docker pull $IMAGE_NAME:latest"
 
       - name: Stop and remove running container
         run: ssh ec2 'docker stop streamlit-stats && docker container prune -f'
