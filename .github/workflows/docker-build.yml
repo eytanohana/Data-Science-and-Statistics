@@ -3,8 +3,16 @@ name: Build docker image
 on:
   pull_request:
     branches: [ "master" ]
+    paths:
+      - "app/**"
+      - "Dockerfile"
+      - "requirements.txt"
   push:
     branches: [ "master" ]
+    paths:
+      - "app/**"
+      - "Dockerfile"
+      - "requirements.txt"
 
 env:
   IMAGE_NAME: ${{ secrets.DOCKERHUB_USER }}/streamlit-stats
