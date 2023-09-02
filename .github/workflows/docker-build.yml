@@ -64,8 +64,10 @@ jobs:
           REMOTE_USER: "ubuntu"
           TARGET: "/home/ubuntu"
           SCRIPT_AFTER: |
-            touch file{1..5}
+            touch file1
             ls
+      - name: test
+        run: ls
       # - name: Login to EC2
       #   run: |
       #     echo $EC2_SSH_KEY > key.pem && chmod 400 key.pem
