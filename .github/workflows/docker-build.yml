@@ -31,7 +31,7 @@ jobs:
         docker build . --file Dockerfile \
           --tag $IMAGE_NAME:latest \
           --tag $IMAGE_NAME:$TAG \
-          --build_arg VERSION=$TAG
+          --build-arg VERSION=$TAG
 
     - name: Docker login
       if: github.ref_name == 'master'
