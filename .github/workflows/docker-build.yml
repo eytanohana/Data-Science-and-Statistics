@@ -50,7 +50,7 @@ jobs:
 
 
   deploy:
-    # needs: build-image
+    needs: build-image
     runs-on: ubuntu-latest
     if: github.ref_name == 'master'
     env:
