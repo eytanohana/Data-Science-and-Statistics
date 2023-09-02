@@ -83,23 +83,26 @@ jobs:
 
       - name: Stop and remove running container
         run: |
-          ssh ec2 bash <<EOF
+          ssh ec2 '
             container_ids=$(docker ps -a -q)
             if [[ "$container_ids" != "" ]]; then
               echo "stopping and removing existing containers..."
               docker stop $container_ids && docker container prune -f
             fi
-          EOF
+          '
+
+      - name: sleep
+        run: sleep 20
 
       - name: Remove images
         run: |
-          ssh ec2 bash <<EOF
+          ssh ec2 '
             image_ids=$(docker images -a -q)
             if [[ "$image_ids" != "" ]]; then
               echo "removing existing images..."
               docker rmi $image_ids && docker image prune -f
             fi
-          EOF
+          '
 
       - name: Pull latest image
         run: ssh ec2 "docker pull $IMAGE_NAME:latest"
