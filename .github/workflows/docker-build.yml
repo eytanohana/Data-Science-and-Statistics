@@ -90,10 +90,16 @@ jobs:
               docker stop $container_ids && docker container prune -f
             fi
           EOF
-          
 
-      - name: Remove old image
-        run: ssh ec2 'docker image prune -f'
+      - name: Remove images
+        run: |
+          ssh ec2 bash <<EOF
+            image_ids=$(docker images -a -q)
+            if [[ "$image_ids" != "" ]]; then
+              echo "removing existing images..."
+              docker rmi $image_ids && docker image prune -f
+            fi
+          EOF
 
       - name: Pull latest image
         run: ssh ec2 "docker pull $IMAGE_NAME:latest"
