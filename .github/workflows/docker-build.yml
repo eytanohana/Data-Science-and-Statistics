@@ -56,18 +56,39 @@ jobs:
       EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
       EC2_HOST: ${{ secrets.EC2_HOST }}
     steps:
-      - name: Deploy to my EC2 instance
-        uses: easingthemes/ssh-deploy@v2.1.5
+      - name: Configure SSH
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          REMOTE_HOST: "stats.eytanohana.com"
-          REMOTE_USER: "ubuntu"
-          TARGET: "/home/ubuntu"
-          SCRIPT_AFTER: |
-            touch file1
-            ls
-      - name: test
-        run: ls
+          SSH_HOST: ${{ secrets.EC2_HOST }}
+          SSH_USER: ${{ secrets.EC2_USER }}
+          SSH_KEY: ${{ secrets.EC2_SSH_KEY }} 
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/github-actions-key
+          chmod 600 ~/.ssh/github-actions-key
+          cat >>~/.ssh/config <<END
+          Host ec2
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/github-actions-key
+            StrictHostKeyChecking no
+          END
+      - name: List home directory
+        run: ssh ec2 'ls -la'
+
+      # - name: Deploy to my EC2 instance
+      #   uses: easingthemes/ssh-deploy@v2.1.5
+      #   env:
+      #     SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+      #     REMOTE_HOST: "stats.eytanohana.com"
+      #     REMOTE_USER: "ubuntu"
+      #     TARGET: "/home/ubuntu"
+      #     SCRIPT_AFTER: |
+      #       touch file1
+      #       ls
+      # - name: test
+      #   run: ls
+
+
       # - name: Login to EC2
       #   run: |
       #     echo $EC2_SSH_KEY > key.pem && chmod 400 key.pem
