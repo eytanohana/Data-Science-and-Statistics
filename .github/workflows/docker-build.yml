@@ -65,14 +65,20 @@ jobs:
           mkdir -p ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/github-actions-key
           chmod 600 ~/.ssh/github-actions-key
+          cat >>~/.ssh/config <<END
           Host ec2
             HostName $SSH_HOST
             User $SSH_USER
             IdentityFile ~/.ssh/github-actions-key
             StrictHostKeyChecking no
           END
+
       - name: List home directory
         run: ssh ec2 'ls -la'
+
+      - name: create file100
+        run: ssh ec2 'touch file100'
+
 
       # - name: Deploy to my EC2 instance
       #   uses: easingthemes/ssh-deploy@v2.1.5
