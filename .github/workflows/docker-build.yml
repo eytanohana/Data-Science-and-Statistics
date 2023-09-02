@@ -62,6 +62,7 @@ jobs:
     env:
       EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
       EC2_HOST: ${{ secrets.EC2_HOST }}
+
     steps:
       - name: Configure SSH
         env:
@@ -80,11 +81,11 @@ jobs:
             StrictHostKeyChecking no
           END
 
-      - name: Pull latest image
-        run: ssh ec2 "docker pull $IMAGE_NAME:latest"
-
       - name: Stop and remove running container
         run: ssh ec2 'docker stop streamlit-stats && docker container prune -f'
+
+      - name: Pull latest image
+        run: ssh ec2 "docker pull $IMAGE_NAME:latest"
 
       - name: Remove old image
         run: ssh ec2 'docker image prune -f'
