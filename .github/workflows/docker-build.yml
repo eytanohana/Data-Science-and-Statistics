@@ -13,8 +13,6 @@ jobs:
   build-image:
 
     runs-on: ubuntu-latest
-    environment:
-      TAG: ${{ steps.new_tag.outputs.TAG }}
 
     steps:
 
@@ -26,8 +24,8 @@ jobs:
       run: echo "TAG=$(date +%Y.%m.%d_%H.%M.%S)" >> "$GITHUB_OUTPUT"
 
     - name: Build Image
-      # env:
-      #   TAG: ${{ steps.new_tag.outputs.TAG }}
+      env:
+        TAG: ${{ steps.new_tag.outputs.TAG }}
       run: |
         docker build . --file Dockerfile \
           --tag $IMAGE_NAME:latest \
@@ -40,8 +38,8 @@ jobs:
         password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN}}
 
     - name: Docker push
-      # env:
-      #   TAG: ${{ steps.new_tag.outputs.TAG }}
+      env:
+        TAG: ${{ steps.new_tag.outputs.TAG }}
       run: |
         docker push $IMAGE_NAME:$TAG
         docker push $IMAGE_NAME:latest
