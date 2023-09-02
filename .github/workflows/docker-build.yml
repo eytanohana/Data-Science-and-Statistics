@@ -27,7 +27,8 @@ jobs:
     - name: Echo tag
       env:
         TAG: ${{ steps.new_tag.outputs.TAG }}
-      run: echo "Created tag: $TAG"
+      run: |
+        echo "Created tag: $TAG"
 
     - name: Build Image
       env:
