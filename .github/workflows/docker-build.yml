@@ -65,7 +65,6 @@ jobs:
           mkdir -p ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/github-actions-key
           chmod 600 ~/.ssh/github-actions-key
-          cat >>~/.ssh/config <<END
           Host ec2
             HostName $SSH_HOST
             User $SSH_USER
