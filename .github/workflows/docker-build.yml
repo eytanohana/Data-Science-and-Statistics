@@ -62,6 +62,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_HOST: "stats.eytanohana.com"
           REMOTE_USER: "ubuntu"
+          TARGET: "/home/ubuntu"
           SCRIPT_AFTER: |
             ls
       # - name: Login to EC2
