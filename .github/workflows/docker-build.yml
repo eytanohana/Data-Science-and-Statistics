@@ -11,45 +11,46 @@ env:
 
 jobs:
 
-  # build-image:
-  #
-  #   runs-on: ubuntu-latest
-  #
-  #   steps:
-  #
-  #   - name: Checkout
-  #     uses: actions/checkout@v3
-  #
-  #   - name: Create tag
-  #     id: new_tag
-  #     run: echo "TAG=$(date +%Y.%m.%d_%H.%M.%S)" >> "$GITHUB_OUTPUT"
-  #
-  #   - name: Build Image
-  #     env:
-  #       TAG: ${{ steps.new_tag.outputs.TAG }}
-  #     run: |
-  #       docker build . --file Dockerfile \
-  #         --tag $IMAGE_NAME:latest \
-  #         --tag $IMAGE_NAME:$TAG
-  #
-  #   - name: Docker login
-  #     if: github.ref_name == 'master'
-  #     uses: docker/login-action@v2
-  #     with:
-  #       username: ${{ secrets.DOCKERHUB_USER }}
-  #       password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN}}
-  #
-  #   - name: Docker push
-  #     if: github.ref_name == 'master'
-  #     env:
-  #       TAG: ${{ steps.new_tag.outputs.TAG }}
-  #     run: |
-  #       docker push $IMAGE_NAME:$TAG
-  #       docker push $IMAGE_NAME:latest
-  #
+  build-image:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Create tag
+      id: new_tag
+      run: echo "TAG=$(date +%Y.%m.%d_%H.%M.%S)" >> "$GITHUB_OUTPUT"
+
+    - name: Build Image
+      env:
+        TAG: ${{ steps.new_tag.outputs.TAG }}
+      run: |
+        docker build . --file Dockerfile \
+          --tag $IMAGE_NAME:latest \
+          --tag $IMAGE_NAME:$TAG \
+          --build_arg VERSION=$TAG
+
+    - name: Docker login
+      if: github.ref_name == 'master'
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USER }}
+        password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN}}
+
+    - name: Docker push
+      if: github.ref_name == 'master'
+      env:
+        TAG: ${{ steps.new_tag.outputs.TAG }}
+      run: |
+        docker push $IMAGE_NAME:$TAG
+        docker push $IMAGE_NAME:latest
+
 
   deploy:
-    # needs: build-image
+    needs: build-image
     runs-on: ubuntu-latest
     if: github.ref_name == 'master'
     env:
@@ -73,29 +74,14 @@ jobs:
             StrictHostKeyChecking no
           END
 
-      - name: List home directory
-        run: ssh ec2 'ls -la'
+      - name: Pull latest image
+        run: ssh ec2 'docker pull $IMAGE_NAME:latest'
 
-      - name: create file100
-        run: ssh ec2 'echo "ahhhh" > file100'
-
-
-      # - name: Deploy to my EC2 instance
-      #   uses: easingthemes/ssh-deploy@v2.1.5
-      #   env:
-      #     SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-      #     REMOTE_HOST: "stats.eytanohana.com"
-      #     REMOTE_USER: "ubuntu"
-      #     TARGET: "/home/ubuntu"
-      #     SCRIPT_AFTER: |
-      #       touch file1
-      #       ls
-      # - name: test
-      #   run: ls
+      - name: Stop and remove running container
+        run: |
+          ssh ec2
+          pwd
+          ls
 
 
-      # - name: Login to EC2
-      #   run: |
-      #     echo $EC2_SSH_KEY > key.pem && chmod 400 key.pem
-      #     ssh -o StrictHostKeyChecking=no -i key.pem $EC2_HOST 'echo hiiiii'
 
