@@ -64,6 +64,7 @@ jobs:
           REMOTE_USER: "ubuntu"
           TARGET: "/home/ubuntu"
           SCRIPT_AFTER: |
+            touch file{1..5}
             ls
       # - name: Login to EC2
       #   run: |
