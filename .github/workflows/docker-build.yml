@@ -3,6 +3,8 @@ name: Build docker image
 on:
   pull_request:
     branches: [ "master" ]
+  push:
+    branches: [ "master" ]
   workflow_call:
 
 env:
