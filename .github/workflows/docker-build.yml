@@ -54,12 +54,11 @@ jobs:
     if: github.ref_name == 'master'
     env:
       EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
-      EC2_HOST: ubuntu@stats.eytanohana.com
+      EC2_HOST: ${{ secrets.EC2_HOST }}
     steps:
       - name: Login to EC2
         run: |
-          echo $EC2_SSH_KEY > key.pem
-          chmod 600 key.pem
+          echo $EC2_SSH_KEY > key.pem && chmod 600 key.pem
           ssh -o StrictHostKeyChecking=no -i key.pem $EC2_HOST 'echo hiiiii'
 
 
