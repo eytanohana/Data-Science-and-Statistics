@@ -81,14 +81,14 @@ jobs:
             StrictHostKeyChecking no
           END
 
-      - name: Pull latest image
-        run: ssh ec2 "docker pull $IMAGE_NAME:latest"
-
       - name: Stop and remove running container
         run: ssh ec2 'docker stop $(docker ps -a -q) && docker container prune -f'
 
       - name: Remove old image
         run: ssh ec2 'docker image prune -f'
+
+      - name: Pull latest image
+        run: ssh ec2 "docker pull $IMAGE_NAME:latest"
 
       - name: Start new container
         run: ssh ec2 "docker run -p 8501:8501 -d --name streamlit-stats $IMAGE_NAME"
