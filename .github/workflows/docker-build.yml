@@ -78,8 +78,13 @@ jobs:
         run: ssh ec2 'docker pull eohana98/streamlit-stats:latest'
 
       - name: Stop and remove running container
-        run: |
-          ssh ec2 'pwd && ls'
+        run: ssh ec2 'docker stop streamlit-stats && docker container prune -f'
+
+      - name: Remove old image
+        run: ssh ec2 'docker image prune -f'
+
+      - name: Start new container
+        run: ssh ec2 'docker run -p 8501:8501 -d --name streamlit-stats $IMAGE_NAME'
 
 
 
