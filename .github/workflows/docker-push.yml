@@ -9,8 +9,8 @@ jobs:
   build-and-push-docker:
     name: Build image and push to DockerHub
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/docker-build.yml
     steps:
+      - uses: ./.github/workflows/docker-build.yml
 
       - name: Docker login
         uses: docker/login-action@v2
