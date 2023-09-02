@@ -6,19 +6,36 @@ on:
 
 jobs:
 
-  build:
-    uses: ./.github/workflows/docker-build.yml
-
-  deploy:
-    name: Push Image
-    needs: build
-    runs-on: ubuntu-latest
-
+  build-and-push-docker:
+    name: Build image and push to DockerHub
     steps:
-    - name: Docker Login
-      run: docker login -u eohana98 -p ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
-    - name: Docker push
-      run: |
-        docker push eohana98/streamlit-stats:latest
-        docker push eohana98/streamlit-stats:${{ github.run_number }}
+
+      - name: Build image
+        uses: ./.github/workflows/docker-build.yml
+
+      - name: Docker login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN}}
+
+      - name: Push to DockerHub
+        env:
+          TAG: ${{ steps.new_tag.outputs.TAG }}
+        run: |
+          docker push $IMAGE_NAME:$TAG
+          docker push $IMAGE_NAME:latest
+
+
+
+
+
+  # deploy:
+  #   name: Log in to ec2
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #
+  #   steps:
+  #   - name: Docker Login
+  #     run: docker login -u eohana98 -p ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
