@@ -56,8 +56,16 @@ jobs:
       EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
       EC2_HOST: ${{ secrets.EC2_HOST }}
     steps:
-      - name: Login to EC2
-        run: |
-          echo $EC2_SSH_KEY > key.pem && chmod 400 key.pem
-          ssh -o StrictHostKeyChecking=no -i key.pem $EC2_HOST 'echo hiiiii'
+      - name: Deploy to my EC2 instance
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: "stats.eytanohana.com"
+          REMOTE_USER: "ubuntu"
+          SCRIPT_AFTER: |
+            ls
+      # - name: Login to EC2
+      #   run: |
+      #     echo $EC2_SSH_KEY > key.pem && chmod 400 key.pem
+      #     ssh -o StrictHostKeyChecking=no -i key.pem $EC2_HOST 'echo hiiiii'
 
