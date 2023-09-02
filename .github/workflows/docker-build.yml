@@ -1,16 +1,46 @@
-name: Docker Image CI
+name: Build docker image
 
-on: [pull_request, workflow_call]
+on:
+  pull_request:
+    branches: [ "master" ]
+  workflow_call:
+
+env:
+  IMAGE_NAME: ${{ secrets.DOCKERHUB_USER }}/streamlit-stats
 
 jobs:
 
-  build:
-    name: Build Image
+  build-image:
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build Image
-      run: docker build . --file Dockerfile --tag eohana98/streamlit-stats:latest --tag eohana98/streamlit-stats:${{ github.run_number }}
 
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Create tag
+      id: new_tag
+      run: echo "TAG=$(date +%Y.%m.%d_%H.%M.%S)" >> "$GITHUB_OUTPUT"
+
+    - name: Build Image
+      env:
+        TAG: ${{ steps.new_tag.outputs.TAG }}
+      run: |
+        docker build . --file Dockerfile \
+          --tag $IMAGE_NAME:latest \
+          --tag $IMAGE_NAME:$TAG
+
+    # - name: Docker login
+    #   uses: docker/login-action@v2
+    #   with:
+    #     username: ${{ secrets.DOCKERHUB_USER }}
+    #     password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN}}
+    #
+    # - name: Docker push
+    #   env:
+    #     TAG: ${{ steps.new_tag.outputs.TAG }}
+    #   run: |
+    #     docker push $IMAGE_NAME:$TAG
+    #     docker push $IMAGE_NAME:latest
+    #
