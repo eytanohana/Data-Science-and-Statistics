@@ -10,4 +10,4 @@ logger = st.logger.get_logger(__name__)
 
 st.header('Welcome!')
 
-logger.info(f"Current Version: {os.environ.get('DOCKER_TAG')}")
+logger.info(f"Current App Version: {os.environ.get('DOCKER_TAG')}")
