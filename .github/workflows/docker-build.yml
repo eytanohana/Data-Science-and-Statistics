@@ -22,13 +22,10 @@ jobs:
 
     - name: Create tag
       id: new_tag
-      run: echo "TAG=$(date +%Y.%m.%d_%H.%M.%S)" >> "$GITHUB_OUTPUT"
-
-    - name: Echo tag
-      env:
-        TAG: ${{ steps.new_tag.outputs.TAG }}
       run: |
-        echo "Created tag: $TAG"
+        tag=$(date +%Y.%m.%d_%H.%M.%S)
+        echo "TAG=$tag" >> "$GITHUB_OUTPUT"
+        echo "Created tag: $tag"
 
     - name: Build Image
       env:
