@@ -84,7 +84,7 @@ jobs:
       - name: Stop and remove running container
         run: |
           ssh ec2 bash <<EOF
-            local container_ids=$(docker ps -a -q)
+            container_ids=$(docker ps -a -q)
             if [[ "$container_ids" != "" ]]; then
               echo "stopping and removing existing containers..."
               docker stop $container_ids && docker container prune -f
