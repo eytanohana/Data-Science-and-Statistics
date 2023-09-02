@@ -2,15 +2,15 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    curl \
-    software-properties-common \
-    && rm -rf /var/lib/apt/lists/*
+# RUN apt-get update && apt-get install -y \
+#     build-essential \
+#     curl \
+#     software-properties-common \
+#     && rm -rf /var/lib/apt/lists/*
 
-ENV VIRTUAL_ENV=./venv
-RUN python3 -m venv $VIRTUAL_ENV
-RUN . $VIRTUAL_ENV/bin/activate
+# ENV VIRTUAL_ENV=./venv
+# RUN python3 -m venv $VIRTUAL_ENV
+# RUN . $VIRTUAL_ENV/bin/activate
 
 COPY requirements.txt ./requirements.txt
 
