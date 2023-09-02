@@ -8,6 +8,7 @@ jobs:
 
   build-and-push-docker:
     name: Build image and push to DockerHub
+    runs-on: ubuntu-latest
     steps:
 
       - name: Build image
