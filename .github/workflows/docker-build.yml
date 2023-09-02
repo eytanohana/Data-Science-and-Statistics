@@ -24,7 +24,7 @@ jobs:
       id: new_tag
       run: |
         echo "TAG=$(date +%Y.%m.%d_%H.%M.%S)" >> "$GITHUB_OUTPUT"
-        echo "created new tag: $TAG"
+        echo "created new tag: $GITHUB_OUTPUT"
 
     - name: Build Image
       env:
