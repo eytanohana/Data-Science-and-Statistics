@@ -9,7 +9,7 @@ jobs:
   build-and-push-docker:
     name: Build image and push to DockerHub
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/docker-build.yml
+    uses: ./.github/workflows/docker-build.yml@master
     
 
 
