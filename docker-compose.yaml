@@ -4,5 +4,7 @@ services:
     container_name: streamlit-stats
     build:
       context: .
+      args:
+        VERSION: local
     ports:
       - '8501:8501'
