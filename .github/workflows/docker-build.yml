@@ -103,14 +103,10 @@ jobs:
 
       - name: Remove images
         run: |
-          ssh ec2 '
-            image_ids=$(docker images -a -q)
-            if [[ "$image_ids" != "" ]]; then
-              echo "removing existing images..."
-              docker rmi $image_ids && docker image prune -f
-            fi
-          '
+          echo "removing old image..."
+          ssh ec2 'docker image prune -f'
 
+      - run: sleep 30
 
       - name: Start new container
         run: ssh ec2 "docker run -p 8501:8501 -d --name streamlit-stats $IMAGE_NAME"
