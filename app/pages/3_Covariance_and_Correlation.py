@@ -1,6 +1,7 @@
 from os import path
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 import seaborn as sns
 import streamlit as st
 
@@ -28,14 +29,14 @@ st.markdown('''Covariance and Correlation describe the relationship between two 
 
 ############################################################################################################
 
-sns.set()
+sns.set_theme()
 a, b, c = st.columns(3)
 with a:
     x = np.random.normal(loc=5, scale=2, size=DATA_POINTS)
     y = 5 * x + np.random.normal(loc=0, scale=10, size=DATA_POINTS)
     fig = plt.figure()
     plt.title('Positive relationship', fontdict={'size': 20})
-    sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
+    sns.regplot(x=x, y=y, ci=None, line_kws={'color': 'k'})
     st.pyplot(fig)
     st.markdown(f'**COV = {cov.covariance(x, y):.3f}, CORR = {cov.correlation(x, y):.3f}**')
 with b:
@@ -43,7 +44,7 @@ with b:
     y = np.random.normal(loc=0, scale=7, size=DATA_POINTS)
     fig = plt.figure()
     plt.title('No relationship', fontdict={'size': 20})
-    sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
+    sns.regplot(x=x, y=y, ci=None, line_kws={'color': 'k'})
     st.pyplot(fig)
     st.markdown(f'**COV = {cov.covariance(x, y):.3f}, CORR = {cov.correlation(x, y):.3f}**')
 with c:
@@ -51,7 +52,7 @@ with c:
     y = -5 * x + np.random.normal(loc=0, scale=10, size=DATA_POINTS)
     fig = plt.figure()
     plt.title('Negative relationship', fontdict={'size': 20})
-    sns.regplot(x, y, ci=None, line_kws={'color': 'k'})
+    sns.regplot(x=x, y=y, ci=None, line_kws={'color': 'k'})
     st.pyplot(fig)
     st.markdown(f'**COV = {cov.covariance(x, y):.3f}, CORR = {cov.correlation(x, y):.3f}**')
 
@@ -104,8 +105,8 @@ yy = 5 * x + np.random.normal(0, 4, DATA_POINTS)
 fig = plt.figure(figsize=(10, 5))
 plt.xlim(0, 10)
 plt.ylim(0, 100)
-sns.regplot(x, y, ci=None, line_kws={'color': 'red', 'label': 'Stronger Slope'})
-sns.regplot(xx, yy, ci=None, line_kws={'color': 'blue', 'label': 'Stronger Correlation'})
+sns.regplot(x=x, y=y, ci=None, line_kws={'color': 'red', 'label': 'Stronger Slope'})
+sns.regplot(x=xx, y=yy, ci=None, line_kws={'color': 'blue', 'label': 'Stronger Correlation'})
 plt.legend()
 st.pyplot(fig)
 
@@ -133,7 +134,7 @@ fig = plt.figure(figsize=(10, 5))
 plt.title(f'Cov = {cov.covariance(x, y)} | Corr = {cov.correlation(x, y)}')
 plt.xlim(0, 10)
 plt.ylim(-100, 100)
-sns.regplot(x, y, ci=None, line_kws={'color': 'black'})
+sns.regplot(x=x, y=y, ci=None, line_kws={'color': 'black'})
 st.pyplot(fig)
 
 ############################################################################################################
@@ -170,7 +171,7 @@ For larger datasets we can create a **Correlation Matrix** to display a heatmap 
 between all the variables** in a much less expensive way.
 ''')
 
-penguin_corr = penguins.corr()
+penguin_corr = penguins.corr(numeric_only=True)
 a, b = st.columns(2)
 with a:
     st.title('The correlation matrix')
@@ -194,7 +195,7 @@ with a:
     spec = st.selectbox('Species', options=species)
     spec_df = penguins[penguins.species == spec]
     fig = plt.figure()
-    sns.heatmap(spec_df.corr(), vmin=-1, vmax=1, cmap='ocean', annot=True, linewidths=1, linecolor='k')
+    sns.heatmap(spec_df.corr(numeric_only=True), vmin=-1, vmax=1, cmap='ocean', annot=True, linewidths=1, linecolor='k')
     st.pyplot(fig)
 with b:
     st.image(path.join(IMAGES_PATH, f'{spec}-pairplot.png'))

@@ -73,7 +73,6 @@ def get_theoretical_sample_means_std():
     return get_distribution_std() / np.sqrt(st.session_state[SAMPLE_SIZE])
 
 
-@st.cache(show_spinner=False)
 def plotly_bar_chart(n_dist_values, mean, std):
     return px.bar(
         x=None if not (mean or std) else st.session_state[DIST_VALS],
@@ -84,7 +83,6 @@ def plotly_bar_chart(n_dist_values, mean, std):
     )
 
 
-@st.cache(show_spinner=False)
 def plotly_distribution_chart(sample_means, group_label, title, bin_size=0.1):
     fig = ff.create_distplot(
         [sample_means],

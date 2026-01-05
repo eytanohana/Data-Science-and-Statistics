@@ -15,7 +15,7 @@ class Uniform:
         fig = plt.figure(figsize=(5, 2))
         plt.xticks(np.arange(a, b+1), fontsize=5)
         plt.yticks(fontsize=5)
-        sns.barplot(k, pmf, color='cadetblue')
+        sns.barplot(x=k, y=pmf, color='cadetblue')
         text = f'E(X) = {cls.expectation(a, b):.2f}\nV(X) = {((b-a+1)**2-1)/12:.2f}'
         plt.text(0.01, 0.95, text, transform=plt.gca().transAxes, fontsize=10,
                  verticalalignment='top', bbox=PROPS)
@@ -40,7 +40,7 @@ class Binomial:
         k = np.arange(0, n+1)
         pmf = binom(n, p).pmf(k)
         fig = plt.figure(figsize=(5, 2))
-        sns.barplot(k, pmf, color='cadetblue')
+        sns.barplot(x=k, y=pmf, color='cadetblue')
         text = f'E(X) = {cls.expectation(n, p):.2f}\nV(X) = {cls.variance(n, p)}'
         plt.xticks(fontsize=5)
         plt.yticks(fontsize=5)
@@ -67,7 +67,7 @@ class Hypergeometric:
         k = np.arange(max(0, N - M + n), min(n, N) + 1)
         pmf = hypergeom(M, n, N).pmf(k)
         fig = plt.figure(figsize=(5, 2))
-        sns.barplot(k, pmf, color='cadetblue')
+        sns.barplot(x=k, y=pmf, color='cadetblue')
         text = f'E(X) = {cls.expectation(M, n, N):.2f}\nV(X) = {cls.variance(M, n, N)}'
         plt.xticks(fontsize=5)
         plt.yticks(fontsize=5)
@@ -94,7 +94,7 @@ class Geometric:
         k = np.arange(1, 30)
         pmf = geom(p).pmf(k)
         fig = plt.figure(figsize=(5, 2))
-        sns.barplot(k, pmf, color='cadetblue')
+        sns.barplot(x=k, y=pmf, color='cadetblue')
         text = f'E(X) = {cls.expectation(p):.2f}\nV(X) = {cls.variance(p)}'
         plt.xticks(fontsize=5)
         plt.yticks(fontsize=5)
@@ -121,7 +121,7 @@ class NegativeBinomial:
         k = np.arange(n, n + 70)
         pmf = nbinom(n, p, loc=n).pmf(k)
         fig = plt.figure(figsize=(5, 2))
-        sns.barplot(k, pmf, color='cadetblue')
+        sns.barplot(x=k, y=pmf, color='cadetblue')
         text = f'E(X) = {cls.expectation(n, p):.2f}\nV(X) = {cls.variance(n, p)}'
         plt.xticks(fontsize=5, rotation=50)
         plt.yticks(fontsize=5)
@@ -148,7 +148,7 @@ class Poisson:
         k = np.arange(0, rate + 21, dtype=int)
         pmf = poisson(rate).pmf(k)
         fig = plt.figure(figsize=(5, 2))
-        sns.barplot(k, pmf, color='cadetblue')
+        sns.barplot(x=k, y=pmf, color='cadetblue')
         text = f'E(X) = {cls.expectation(rate):.2f}\nV(X) = {cls.variance(rate)}'
         plt.xticks(fontsize=5, rotation=50)
         plt.yticks(fontsize=5)
