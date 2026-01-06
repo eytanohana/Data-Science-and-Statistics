@@ -26,10 +26,17 @@ a, b, c = st.columns(3)
 a.markdown('$P(X=k)=\\frac{1}{b-a+1}\;\\textrm{, for } k = a, ..., b$')
 b.markdown('$E(X) = \\frac{a+b}{2}$')
 c.markdown('$V(X) = \\frac{(b - a + 1)^2 - 1}{12}$')
-a, b = st.columns(2)
-start = a.slider('a', min_value=1, max_value=5, value=1)
-end = b.slider('b', min_value=6, max_value=10, value=6)
-st.pyplot(dist.Uniform.plot_dist(start, end))
+
+
+@st.fragment()
+def uniform_distribution():
+    a, b = st.columns(2)
+    start = a.slider('a', min_value=1, max_value=5, value=1)
+    end = b.slider('b', min_value=6, max_value=10, value=6)
+    st.pyplot(dist.Uniform.plot_dist(start, end))
+
+
+uniform_distribution()
 
 st.markdown('''
 ---
@@ -41,10 +48,17 @@ a, b, c = st.columns(3)
 a.markdown('$P(X=k)={n \choose k} p^k (1-p)^{n-k}\;\\textrm{, for } k = 0, 1,  ..., n$')
 b.markdown('$E(X) = np$')
 c.markdown('$V(X) = np(1-p)$')
-a, b = st.columns(2)
-n = a.slider('n', min_value=0, max_value=30, value=15)
-p = b.slider('p', min_value=0.0, max_value=1.0, value=0.5)
-st.pyplot(dist.Binomial.plot_dist(n, p))
+
+
+@st.fragment()
+def binomial_distribution():
+    a, b = st.columns(2)
+    n = a.slider('n', min_value=0, max_value=30, value=15)
+    p = b.slider('p', min_value=0.0, max_value=1.0, value=0.5)
+    st.pyplot(dist.Binomial.plot_dist(n, p))
+
+
+binomial_distribution()
 
 st.markdown('''
 ---
@@ -52,16 +66,25 @@ st.markdown('''
 > X is a random variable that counts the number of "special" items taken from
 >choosing $N$ times out of a total population size of $M$ without replacement.
 ''')
+
 a, b, c = st.columns(3)
 a.markdown('$P(X=k)=\large{\\frac{{n \choose k}{M-n \choose N-k}}{M \choose N}}'
            '\\textrm{ for } k =\\textrm{max}(0,N-(M-n)),...,\\textrm{min}(N, n)$')
 b.markdown('$E(X) = N\\frac{n}{M}$')
 c.markdown('$V(X) = \\frac{M-N}{M-1}N\\frac{n}{M}(1 - \\frac{n}{M})$')
-a, b, c = st.columns(3)
-M = a.slider('M', min_value=50, max_value=100, value=50)
-n = b.slider('n', min_value=0, max_value=50, value=30)
-N = c.slider('N', min_value=0, max_value=50, value=30)
-st.pyplot(dist.Hypergeometric.plot_dist(M, n, N))
+
+
+@st.fragment()
+def hypergeometric_distribution():
+    a, b, c = st.columns(3)
+    M = a.slider('M', min_value=50, max_value=100, value=50)
+    n = b.slider('n', min_value=0, max_value=50, value=30)
+    N = c.slider('N', min_value=0, max_value=50, value=30)
+    st.pyplot(dist.Hypergeometric.plot_dist(M, n, N))
+
+
+hypergeometric_distribution()
+
 
 st.markdown('''
 ---
@@ -74,8 +97,16 @@ a.markdown('$P(X=k)=(1-p)^{k-1}p'
            '\\textrm{ for } k = 1,2,3,...$')
 b.markdown('$E(X) = \\frac{1}{p}$')
 c.markdown('$V(X) = \\frac{1-p}{p^2}$')
-p = st.slider('p', min_value=0.0, max_value=1.0, value=0.5, step=0.05)
-st.pyplot(dist.Geometric.plot_dist(p))
+
+
+@st.fragment()
+def geometric_distribution():
+    p = st.slider('p', min_value=0.0, max_value=1.0, value=0.5, step=0.05)
+    st.pyplot(dist.Geometric.plot_dist(p))
+
+
+geometric_distribution()
+
 
 st.markdown('''
 ---
@@ -88,10 +119,18 @@ a, b, c = st.columns(3)
 a.markdown('$P(X=k)={k-1 \choose n-1} p^n (1-p)^{k-n} \;\\textrm{ for } k = n, n+1, n+2, ...$')
 b.markdown('$E(X) = \\frac{n}{p}$')
 c.markdown('$V(X) = n\\frac{1-p}{p^2}$')
-a, b = st.columns(2)
-n = a.slider('n', min_value=1, max_value=50)
-p = b.slider('p', min_value=0.0, max_value=1.0, value=0.5, step=0.05, key='nbp')
-st.pyplot(dist.NegativeBinomial.plot_dist(n, p))
+
+
+@st.fragment()
+def negative_binomial_distribution():
+    a, b = st.columns(2)
+    n = a.slider('n', min_value=1, max_value=50)
+    p = b.slider('p', min_value=0.0, max_value=1.0, value=0.5, step=0.05, key='nbp')
+    st.pyplot(dist.NegativeBinomial.plot_dist(n, p))
+
+
+negative_binomial_distribution()
+
 
 st.markdown('''
 ---
@@ -103,8 +142,16 @@ a, b, c = st.columns(3)
 a.markdown('$P(X=k)=\large{\\frac{\lambda^k}{k!}}e^{-\lambda} \;\\textrm{ for } k = 0, 1, 2, ...$')
 b.markdown('$E(X) = \lambda$')
 c.markdown('$V(X) = \lambda$')
-rate = st.slider('λ', min_value=1.0, max_value=20.0, step=0.1)
-st.pyplot(dist.Poisson.plot_dist(rate))
+
+
+@st.fragment()
+def poisson_distribution():
+    rate = st.slider('λ', min_value=1.0, max_value=20.0, step=0.1)
+    st.pyplot(dist.Poisson.plot_dist(rate))
+
+
+poisson_distribution()
+
 
 st.markdown('''
 ## Continuous Distributions

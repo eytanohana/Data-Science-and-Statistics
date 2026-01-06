@@ -125,17 +125,24 @@ st.markdown('''
 Now we'll generate some new random data. Pay attention to the covariance and correlation
 as you choose the trend and scale of the randomly generated data.
 ''')
-a, b = st.columns(2)
-slope = a.slider('Trend', min_value=-10, max_value=10, value=-10, help='The general slope of the data.')
-scale = b.slider('Scale', min_value=0, max_value=50, value=20, help='How scattered the data should be.')
-x = np.linspace(0, 10, DATA_POINTS)
-y = slope * x + np.random.normal(0, scale, DATA_POINTS)
-fig = plt.figure(figsize=(10, 5))
-plt.title(f'Cov = {cov.covariance(x, y)} | Corr = {cov.correlation(x, y)}')
-plt.xlim(0, 10)
-plt.ylim(-100, 100)
-sns.regplot(x=x, y=y, ci=None, line_kws={'color': 'black'})
-st.pyplot(fig)
+
+
+@st.fragment()
+def cov_corr_graphs():
+    a, b = st.columns(2)
+    slope = a.slider('Trend', min_value=-10, max_value=10, value=-10, help='The general slope of the data.')
+    scale = b.slider('Scale', min_value=0, max_value=50, value=20, help='How scattered the data should be.')
+    x = np.linspace(0, 10, DATA_POINTS)
+    y = slope * x + np.random.normal(0, scale, DATA_POINTS)
+    fig = plt.figure(figsize=(10, 5))
+    plt.title(f'Cov = {cov.covariance(x, y)} | Corr = {cov.correlation(x, y)}')
+    plt.xlim(0, 10)
+    plt.ylim(-100, 100)
+    sns.regplot(x=x, y=y, ci=None, line_kws={'color': 'black'})
+    st.pyplot(fig)
+
+
+cov_corr_graphs()
 
 ############################################################################################################
 
@@ -188,20 +195,25 @@ are negatively correlated; but if you look at the pairplot above again, what we 
 distinct species of penguins where bill depth and flipper length/body mass are actually
 positively correlated. We can see this if we view their individual heatmaps''')
 
-species = penguins.species.unique()
-a, b = st.columns(2)
 
-with a:
-    spec = st.selectbox('Species', options=species)
-    spec_df = penguins[penguins.species == spec]
-    fig = plt.figure()
-    sns.heatmap(spec_df.corr(numeric_only=True), vmin=-1, vmax=1, cmap='ocean', annot=True, linewidths=1, linecolor='k')
-    st.pyplot(fig)
-with b:
-    st.image(path.join(IMAGES_PATH, f'{spec}-pairplot.png'))
+@st.fragment()
+def species_heatmap():
+    species = penguins.species.unique()
+    a, b = st.columns(2)
+    with a:
+        spec = st.selectbox('Species', options=species)
+        spec_df = penguins[penguins.species == spec]
+        fig = plt.figure()
+        sns.heatmap(spec_df.corr(numeric_only=True), vmin=-1, vmax=1, cmap='ocean', annot=True, linewidths=1, linecolor='k')
+        st.pyplot(fig)
+    with b:
+        st.image(path.join(IMAGES_PATH, f'{spec}-pairplot.png'))
+
+
+species_heatmap()
 
 st.markdown('''
 Even though the first heatmap showed some features had a seemingly negative correlation, only
 by massaging the data and trying to visualize it as many ways as possible can we start to get
 the whole picture of what's really going on.''')
-st.image(path.join(IMAGES_PATH, 'penguins-pairplot-species.png'), width=750)
+st.image(path.join(IMAGES_PATH, 'penguins-pairplot-species.png'), width='content')
